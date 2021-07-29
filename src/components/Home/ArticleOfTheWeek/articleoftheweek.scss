@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+
+    &-article {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+
+        & p {
+            position: absolute;
+            bottom: 40px;
+            font-size: 1em;
+            right: 35px;
+        }
+        
+        & img {
+            width: 100%;
+            border-radius: 15px;
+        }
+    }
+}

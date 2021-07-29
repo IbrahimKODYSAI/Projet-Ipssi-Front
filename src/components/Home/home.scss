@@ -1,0 +1,50 @@
+.home {
+    width: 80%;
+    margin: auto;
+    margin-top: 2em;
+
+    &-container {
+        display: flex;
+        justify-content: space-between;
+        // border: 1px solid red;
+
+        &_leftbox {
+            width: 70%;
+            border-radius: 15px;
+            padding: 1em;
+            background-color: white;
+        }
+        &_rightbox{
+            width: 29%;
+            border-radius: 15px;
+            padding: 1em;
+            background-color: white;
+        }
+    }
+}
+.div-btn{
+    display: flex;
+    margin-top: 1em;
+    padding: 0.5em;
+    background-color: white;
+    justify-content: space-between;
+    border-radius: 15px;
+
+}
+.btn1, .btn2, .btn3, .btn4{
+    display: inline-block;
+    text-decoration: none;
+    border: none;
+    font-size: 0.8em;
+    text-align: center;
+    border-radius: 5px;
+    font-weight: bold;
+    padding: 0.7em;
+    margin: 0.2em;
+    color: white;
+    text-transform: uppercase;
+}
+.btn1{background-color: #62B3B4}
+.btn2{background-color: #95AB55}
+.btn3{background-color: #DBAE55}
+.btn4{background-color: #62B3B4}

@@ -1,0 +1,82 @@
+.footer-navigation{
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1em;
+  padding-top: 2em;
+  justify-content: center;
+  background-color: rgb(221, 217, 217);
+}
+.help{
+  column-count: 1;
+  line-height: 2em;
+}
+.footer-navigation h2{
+  font-size: 1em;
+  font-weight: bold;
+  font-family: 'Josefin Sans', sans-serif;
+  text-transform: uppercase;
+  margin-bottom: 1em;
+}
+.footer-navigation section{
+  width: 15%;
+  margin: 0 1em;
+  /* border: 1px solid red; */
+}
+.card{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.card li{
+  margin: 1em;
+}
+.card img{
+  height: 49px;
+  width: 89px;
+}
+.footer-navigation-2{
+  color: white;
+  font-weight: bold;
+  background-color: #4a4a4a;
+  width: 100%;
+}
+.mentions-liste{
+  text-align: center;
+  width: 100%;
+  margin: auto;
+}
+.footer-navigation-2 ul li{
+  display: inline-block;
+  margin: 1em 0.2em;
+  padding: 0 1em;
+  border-right: 1px solid white;
+}
+.app-icons{
+  width: 80%;
+  text-align: center;
+  margin: 1em auto;
+}
+.app-icons svg {
+  fill: #b2b2b2;
+  width: 80px;
+  height: 80px;
+  padding: 0.5em;
+  background-color: #4a4a4a;
+  border-radius: 50%;
+  margin: 1em 0.5em;
+}
+.social-icons{
+  width: 80%;
+  text-align: center;
+  margin: auto;
+}
+
+.social-icons svg{
+  fill:  #4a4a4a;
+  width: 60px;
+  height: 60px;
+  padding: 0.5em;
+  background-color: #b2b2b2;
+  border-radius: 50%;
+  margin: 1em 0.5em;
+}
