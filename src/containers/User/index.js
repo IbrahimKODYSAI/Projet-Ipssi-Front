@@ -1,19 +1,18 @@
 import { connect } from 'react-redux';
-import User from '../../components/User';
-// import { setActiveItemUserMenu } from '../../store/reducer';
+import User from 'components/User';
+import { getUserInfo } from 'store/reducer';
 
 
 const mapStateToProps = state => ({
-  activeItemUserMenu: state.activeItemUserMenu,
+  isAdmin: state.userInfo.isAdmin,
+  avatar: state.userInfo.avatar
 });
 
-const mapDispatchToProps = {
-  activeItem: () => {
-    return {
-      type: 'SET_ACTIVE_ITEM_USER_MENU'
-    }
-  }
-};
+const mapDispatchToProps = dispatch => ({
+  userInfo: () => {
+    dispatch(getUserInfo());
+  },
+});
 
 const UserContainer = connect(
   mapStateToProps,

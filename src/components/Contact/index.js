@@ -9,12 +9,9 @@ const Contact = ({
   contactFirstName,
   contactLastName,
   contactEmail,
-  onSubmitContact,
 }) => {
   const submitHandler = (event) => {
     event.preventDefault();
-
-    onSubmitContact();
   };
 
   const changeHandler = (event) => {
@@ -77,7 +74,6 @@ Contact.propTypes = {
   contactEmail: PropTypes.string.isRequired,
   InputChange: PropTypes.func.isRequired,
   contactMessage: PropTypes.string.isRequired,
-  onSubmitContact: PropTypes.func.isRequired,
 };
 
 export default Contact; 

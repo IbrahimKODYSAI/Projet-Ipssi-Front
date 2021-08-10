@@ -28,13 +28,13 @@ const Login = ({
         <form className="form" onSubmit={handleSubmit}>
           <Field
             name="loginEmail"
-            placeholder="Your Email *"
+            placeholder="Email *"
             type="email"
             value={loginEmail}
           />
           <Field
             name="loginPassword"
-            placeholder="Your Password *"
+            placeholder="Password *"
             type="password"
             value={loginPassword}
           />

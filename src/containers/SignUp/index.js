@@ -6,11 +6,12 @@ import SignUp from '../../components/SignUp';
 import { onSubmitRegister } from '../../store/reducer';
 
 const mapStateToProps = state => ({
-  registerEmail: state.registerEmail,
-  registerPassword: state.registerPassword,
-  registerUserName: state.registerUserName,
   registerLastName: state.registerLastName,
   registerFirstName: state.registerFirstName,
+  registerUserName: state.registerUserName,
+  registerEmail: state.registerEmail,
+  registerPassword: state.registerPassword,
+  registerPasswordConfirm: state.registerPasswordConfirm,
 
 });
 

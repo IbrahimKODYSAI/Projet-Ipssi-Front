@@ -4,7 +4,6 @@
   color: $color-text;
   max-width: 360px;
   margin: 3em auto;
-  font-family: 'Crimson Text', serif;
 
   &-title {
     color: $color-title;
@@ -57,7 +56,6 @@
     text-transform: uppercase;
     height: 3.3em;
     width: 100%;
-    font-family: 'Source Sans Pro', sans-serif;
     font-weight: 700;
 
     &.form-submit--login {

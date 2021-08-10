@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import LangFr from "../../assets/img/fr.png";
 import LOGO from "../../assets/img/LOGO.PNG";
+import "../../styles/utils.scss"
 
 const Header = ({
   inputSearchValue,
@@ -78,18 +79,30 @@ const Header = ({
                         <svg id="pinterest" preserveAspectRatio="xMidYMid meet" viewBox="0 0 486.392 486.392"><path d="M430.15 135.248C416.864 39.125 321.075-9.818 218.872 1.642 138.07 10.702 57.513 76.03 54.168 169.447c-2.037 57.03 14.136 99.8 68.4 111.84 23.498-41.586-7.57-50.676-12.434-80.802C90.222 77.367 252.16-6.718 336.974 79.313c58.733 59.583 20.034 242.77-74.57 223.71-90.62-18.18 44.384-164.005-27.936-192.61-58.793-23.287-90.013 71.134-62.137 118.07-16.354 80.712-51.556 156.71-37.3 257.91 46.208-33.56 61.803-97.734 74.57-164.704 23.226 14.135 35.66 28.757 65.27 31.037 109.194 8.48 170.266-109.014 155.28-217.48z" /></svg>
                         <svg id="instagram" preserveAspectRatio="xMidYMid meet" viewBox="0 0 97.395 97.395"><path d="M12.5 0h72.394c6.875 0 12.5 5.09 12.5 12.5v72.395c0 7.41-5.625 12.5-12.5 12.5H12.5c-6.876 0-12.5-5.09-12.5-12.5V12.5C0 5.09 5.624 0 12.5 0zm58.45 10.82a4.395 4.395 0 0 0-4.383 4.386V25.7a4.396 4.396 0 0 0 4.383 4.386h11.008A4.398 4.398 0 0 0 86.34 25.7V15.207a4.397 4.397 0 0 0-4.384-4.385H70.948zm15.44 30.368h-8.573a28.486 28.486 0 0 1 1.25 8.355c0 16.2-13.556 29.332-30.275 29.332-16.718 0-30.272-13.132-30.272-29.332 0-2.904.438-5.708 1.25-8.355h-8.945v41.14a3.884 3.884 0 0 0 3.872 3.873h67.822a3.883 3.883 0 0 0 3.872-3.87V41.187h-.003zm-37.6-11.655c-10.8 0-19.56 8.485-19.56 18.953S37.99 67.44 48.79 67.44c10.804 0 19.563-8.486 19.563-18.954s-8.757-18.953-19.56-18.953z" /></svg>
                     </div> */}
+        {!JSON.parse(sessionStorage.getItem('token')) && (
           <div className="header-top_account">
-            <Link to="/Login" exact="true">
-              <button className="header-top_account-btn1" type="button">
-                Login
-              </button>
-            </Link>
-            <Link to="/signup" exact="true">
-              <button className="header-top_account-btn2" type="button">
-                Register
-              </button>
-            </Link>
+              <Link to="/login" exact="true">
+                <button className="btn btn-primary" type="button">
+                  Login
+                </button>
+              </Link>
+              <Link to="/signup" exact="true">
+                <button className="btn btn-warning" type="button">
+                  Register
+                </button>
+              </Link>
+
           </div>
+        )}
+        {JSON.parse(sessionStorage.getItem('token')) && (
+          <div className="header-top_account">
+              <Link to="/user" exact="true">
+                <button className="btn btn-primary" type="button">
+                  My account
+                </button>
+              </Link>
+          </div>
+        )}
         </div>
         <div className="nav-pdg">
           <div className="sub-nav">

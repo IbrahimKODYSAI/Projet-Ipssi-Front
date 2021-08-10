@@ -3,26 +3,25 @@ import ".";
 import { Link } from "react-router-dom";
 import "./articles.scss";
 
-const Articles = ({ products, setSortedProducts }) => {
+const Articles = ({ getProducts, products, setSortedProducts }) => {
   const sortProducts = () => {
     const sorted = products.sort((a, b) => b.likes - a.likes);
     setSortedProducts(sorted);
   };
-
   useEffect(() => {
     sortProducts();
-    console.log(new Date());
-  });
+    getProducts();
+  }, []);
   return (
     <div>
       <section id="article-section">
         <div className="c-wings c-wings--sm">Articles populaire</div>
         <div className="container1">
           {products.slice(0, 6).map((item) => (
-            <article key={item.id} className="container1-article">
+            <article key={item._id} className="container1-article">
               <div className="container1-article_imgbox">
-                <Link to={`/article/${item.id}`} exact="true">
-                  <img src={item.images[0]} alt="" />
+                <Link to={`/article/${item._id}`} exact="true">
+                  <img src={`http://localhost:3001/${item.images[0].filePath}`} alt="" />
                 </Link>
               </div>
               <div className="container1-article_label">
@@ -43,10 +42,10 @@ const Articles = ({ products, setSortedProducts }) => {
         <div className="c-wings c-wings--sm">Nouveautés</div>
         <div className="container1">
           {products.map((item) => (
-            <article key={item.id} className="container1-article">
+            <article key={item._id} className="container1-article">
               <div className="container1-article_imgbox">
-                <Link to={`/article/${item.id}`} exact="true">
-                  <img src={item.images[0]} alt="" />
+                <Link to={`/article/${item._id}`} exact="true">
+                  <img src={`http://localhost:3001/${item.images[0].filePath}`} alt="" />
                 </Link>
               </div>
               <div className="container1-article_label">
@@ -62,9 +61,6 @@ const Articles = ({ products, setSortedProducts }) => {
             </article>
           ))}
         </div>
-        <Link to="/admin" exact="true">
-          <button>admin</button>
-        </Link>
       </section>
     </div>
   );

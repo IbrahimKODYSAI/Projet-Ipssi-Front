@@ -11,11 +11,12 @@ import '../../components/Login/login.scss';
 
 // == composant
 const SignUp = ({
-  registerLastName,
   registerFirstName,
+  registerLastName,
   registerUserName,
   registerEmail,
   registerPassword,
+  registerPasswordConfirm,
   onSubmitForm,
 }) => {
   const handleSubmit = (evt) => {
@@ -30,34 +31,40 @@ const SignUp = ({
         <p className="app-desc">{dataText.login.desc}</p>
         <form className="form" onSubmit={handleSubmit}>
           <Field
-            name="registerLastName"
-            placeholder="Your Name *"
-            type="lastName"
-            value={registerLastName}
-          />
-          <Field
             name="registerFirstName"
-            placeholder="Your Firstname *"
-            type="firstName"
+            placeholder="Firstname *"
+            type="text"
             value={registerFirstName}
           />
           <Field
+            name="registerLastName"
+            placeholder="Lastname *"
+            type="text"
+            value={registerLastName}
+          />
+          <Field
             name="registerUserName"
-            placeholder="Your Username *"
-            type="userName"
+            placeholder="Username *"
+            type="text"
             value={registerUserName}
           />
           <Field
             name="registerEmail"
-            placeholder="Your Email *"
+            placeholder="Email *"
             type="email"
             value={registerEmail}
           />
           <Field
             name="registerPassword"
-            placeholder="Your Password *"
+            placeholder="Password *"
             type="password"
             value={registerPassword}
+          />
+          <Field
+            name="registerPasswordConfirm"
+            placeholder="Confirm password *"
+            type="password"
+            value={registerPasswordConfirm}
           />
           <button
             className="form-submit form-submit--login"

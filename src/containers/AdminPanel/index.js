@@ -1,25 +1,30 @@
-import { connect } from "react-redux";
-import AdminPanel from "components/AdminPanel";
+import { connect } from 'react-redux';
+import AdminPanel from 'components/AdminPanel';
+import { getUserInfo, getAllProducts, getAllUsers } from 'store/reducer';
 
-import { onInputChange } from "store/reducer";
 
-const mapStateToProps = (state) => ({
-  creatProductTitle: state.creatProductTitle,
-  creatProductDescription: state.creatProductDescription,
-  creatProductPrice: state.creatProductPrice,
-  creatProductContent: state.creatProductContent,
+const mapStateToProps = state => ({
+  isAdmin: state.userInfo.isAdmin,
+  avatar: state.userInfo.avatar,
+  products: state.products,
+  users: state.users,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  InputChange: (name, value) => {
-    dispatch(onInputChange(name, value));
+const mapDispatchToProps = dispatch => ({
+  getProducts: () => {
+    dispatch(getAllProducts());
+  },
+  userInfo: () => {
+    dispatch(getUserInfo());
+  },
+  getUsers: () => {
+    dispatch(getAllUsers());
   },
 });
 
 const AdminPanelContainer = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(AdminPanel);
 
-// export
 export default AdminPanelContainer;

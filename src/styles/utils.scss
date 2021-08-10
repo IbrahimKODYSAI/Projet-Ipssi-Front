@@ -1,0 +1,22 @@
+.btn{
+    margin: 0 10px;
+    width: 90px;
+    border: none;
+    height: 30px;
+    border-radius: 3px;
+
+    &-primary{
+        background-color: rgb(42, 138, 255);
+        color: white;
+    }
+
+    &-success{
+        background-color: rgb(36, 221, 88);
+        color: white;
+    }
+
+    &-warning{
+        background-color: rgb(245, 45, 45);
+        color: white;
+    }
+}

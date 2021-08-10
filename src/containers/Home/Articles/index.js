@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 
 import Articles from "components/Home/Articles";
-import { setSortedProducts } from "store/reducer";
+import { setSortedProducts, getAllProducts } from "store/reducer";
 
 const mapStateToProps = (state) => ({
   products: state.products,
@@ -11,6 +11,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   setSortedProducts: (sortProducts) => {
     dispatch(setSortedProducts(sortProducts));
+  },
+  getProducts: () => {
+    dispatch(getAllProducts());
   },
 });
 

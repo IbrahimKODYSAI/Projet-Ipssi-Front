@@ -6,7 +6,12 @@ const initialState = {
   registerUserName: "",
   registerEmail: "",
   registerPassword: "",
+  registerPasswordConfirm: "",
   email: "",
+
+  newComment: "",
+  commentList: [
+  ],
 
   contactFirstName: "",
   contactLastName: "",
@@ -17,10 +22,19 @@ const initialState = {
     firstName: "",
     lastName: "",
     userName: "",
-    mail: "",
-    avatar: "",
-    role: "",
+    email: "",
+    avatar: [
+      {
+        fileName: "",
+        filePath: "",
+        filetype: "",
+        fileSize: "",
+      }
+    ],
+    isAdmin: false
   },
+
+  Users: [],
 
   inputSearchValue: "",
 
@@ -28,8 +42,8 @@ const initialState = {
 
   products: [
     {
-      id: "1",
-      description: "",
+      _id: "1",
+      name: "",
       title: "Chaussures Vulcanisé",
       price: 24.99,
       imgbig:
@@ -40,17 +54,16 @@ const initialState = {
         "https://www.cdiscount.com/pdt2/0/9/7/3/700x700/mp30665097/rw/new-balance-baskets-gm500trs-gris-bleu-mixte.jpg",
         "https://www.cdiscount.com/pdt2/0/9/7/4/700x700/mp30665097/rw/new-balance-baskets-gm500trs-gris-bleu-mixte.jpg",
       ],
-      content:
+      description:
         "Sandales d'été pour hommes, tongs d'extérieur, de plage, bon marché, nouvelle collection 2020",
       colors: ["red", "black", "crimson", "teal"],
       size: ["40", "40 1/2", "41 1/2", "42", "43"],
       rating: [4, 4, 4, 5, 2, 5, 5, 1, 3, 5],
-      count: 1,
-      date: "Mar 12 2012 10:00:00 AM",
+      stock: 1,
     },
     {
-      id: "2",
-      description: "",
+      _id: "2",
+      name: "",
       title: "Chaussures d'été, mocassins de tennis",
       price: 35.99,
       imgbig:
@@ -61,17 +74,16 @@ const initialState = {
         "https://www.cdiscount.com/pdt2/0/9/7/3/700x700/mp30665097/rw/new-balance-baskets-gm500trs-gris-bleu-mixte.jpg",
         "https://www.cdiscount.com/pdt2/0/9/7/4/700x700/mp30665097/rw/new-balance-baskets-gm500trs-gris-bleu-mixte.jpg",
       ],
-      content:
+      description:
         "Sandales d'été pour hommes, tongs d'extérieur, de plage, bon marché, nouvelle collection 2020",
       colors: ["red", "black", "crimson", "teal"],
       size: ["40", "40 1/2", "41 1/2", "42", "43"],
       rating: [4, 4, 4, 5, 2, 5, 5, 1, 3, 5],
-      count: 1,
-      date: "Mar 12 2012 10:00:00 AM",
+      stock: 1,
     },
     {
-      id: "3",
-      description: "",
+      _id: "3",
+      name: "",
       title: "Montre de sport connectée",
       price: 10.99,
       imgbig:
@@ -82,17 +94,16 @@ const initialState = {
         "https://www.cdiscount.com/pdt2/0/9/7/3/700x700/mp30665097/rw/new-balance-baskets-gm500trs-gris-bleu-mixte.jpg",
         "https://www.cdiscount.com/pdt2/0/9/7/4/700x700/mp30665097/rw/new-balance-baskets-gm500trs-gris-bleu-mixte.jpg",
       ],
-      content:
+      description:
         "Sandales d'été pour hommes, tongs d'extérieur, de plage, bon marché, nouvelle collection 2020",
       colors: ["red", "black", "crimson", "teal"],
       size: ["40", "40 1/2", "41 1/2", "42", "43"],
       rating: [4, 4, 4, 5, 2, 5, 5, 1, 3, 5],
-      count: 1,
-      date: "Mar 12 2012 10:00:00 AM",
+      stock: 1,
     },
     {
-      id: "4",
-      description: "NEW BALANCE Baskets GM500TRS Gris/Bleu Mixte",
+      _id: "4",
+      name: "NEW BALANCE Baskets GM500TRS Gris/Bleu Mixte",
       title: "New balance Baskets ",
       price: 39.99,
       imgbig:
@@ -103,17 +114,16 @@ const initialState = {
         "https://www.cdiscount.com/pdt2/0/9/7/3/700x700/mp30665097/rw/new-balance-baskets-gm500trs-gris-bleu-mixte.jpg",
         "https://www.cdiscount.com/pdt2/0/9/7/4/700x700/mp30665097/rw/new-balance-baskets-gm500trs-gris-bleu-mixte.jpg",
       ],
-      content:
+      description:
         "● Baskets pour hommes● A lacets ● Qualité haute ● Contrefort Rembourré ● Languette rembourrée ● Semelle intermédiaire en mousse EVA● Marque Slazenger ● Tige: Cuir, Doublure: textile, Semelle: Synthétique● Essuyez avec un chiffon humide",
       colors: ["red", "black", "crimson", "teal"],
       size: ["40", "40 1/2", "41 1/2", "42", "43"],
       rating: [4, 4, 4, 5, 2, 5, 5, 1, 3, 5],
-      count: 1,
-      date: "Mar 12 2012 10:00:00 AM",
+      stock: 1,
     },
     {
-      id: "5",
-      description: "",
+      _id: "5",
+      name: "",
       title: "Bracelet en chaîne cubaine pour hommes",
       price: 74.99,
       imgbig:
@@ -124,17 +134,16 @@ const initialState = {
         "https://www.cdiscount.com/pdt2/0/9/7/3/700x700/mp30665097/rw/new-balance-baskets-gm500trs-gris-bleu-mixte.jpg",
         "https://www.cdiscount.com/pdt2/0/9/7/4/700x700/mp30665097/rw/new-balance-baskets-gm500trs-gris-bleu-mixte.jpg",
       ],
-      content:
+      description:
         "Sandales d'été pour hommes, tongs d'extérieur, de plage, bon marché, nouvelle collection 2020",
       colors: ["red", "black", "crimson", "teal"],
       size: ["40", "40 1/2", "41 1/2", "42", "43"],
       rating: [4, 4, 4, 5, 2, 5, 5, 1, 3, 5],
-      count: 1,
-      date: "Mar 12 2012 10:00:00 AM",
+      stock: 1,
     },
     {
-      id: "6",
-      description: "",
+      _id: "6",
+      name: "",
       title: "Montre de luxe pour hommes",
       price: 29.99,
       imgbig:
@@ -145,13 +154,12 @@ const initialState = {
         "https://www.cdiscount.com/pdt2/0/9/7/3/700x700/mp30665097/rw/new-balance-baskets-gm500trs-gris-bleu-mixte.jpg",
         "https://www.cdiscount.com/pdt2/0/9/7/4/700x700/mp30665097/rw/new-balance-baskets-gm500trs-gris-bleu-mixte.jpg",
       ],
-      content:
+      description:
         "Sandales d'été pour hommes, tongs d'extérieur, de plage, bon marché, nouvelle collection 2020",
       colors: ["red", "black", "crimson", "teal"],
       size: ["40", "40 1/2", "41 1/2", "42", "43"],
       rating: [4, 4, 4, 5, 2, 5, 5, 1, 3, 5],
-      count: 1,
-      date: "Mar 12 2012 10:00:00 AM",
+      stock: 1,
     },
   ],
   sortedProducts: [],
@@ -160,10 +168,17 @@ const initialState = {
     description: "",
     title: "",
     price: null,
-    images: [],
+    images: [
+      {
+        fileName: "",
+        filePath: "",
+        filetype: "",
+        fileSize: "",
+      }
+    ],
     content: "",
+    comments: [],
     colors: [],
-    size: [],
     rating: [],
     count: null,
     date: "",
@@ -192,20 +207,43 @@ const initialState = {
   ],
   activeItemUserMenu: false,
   activeItemIndex: 0,
-  creatProductTitle: "",
-  creatProductDescription: "",
-  creatProductContent: "",
-  creatProductPrice: 0,
+
+  createProductName: "",
+  createProductTitle: "",
+  createProductDescription: "",
+  createProductPrice: 0,
+  createProductCategory: "",
+  createProductCategory2: "",
+  createProductCategory3: "",
+  createProductCategory4: "",
+  createProductImage: "",
+  createProductImage2: "",
+  createProductImage3: "",
+  createProductImage4: "",
+  createProductColor: "",
+  createProductColor2: "",
+  createProductColor3: "",
+  createProductColor4: "",
+  createProductImages: [],
+  creatProductStock: 0,
+
+
 };
 
-export const GET_ONE_PRODUCT = "GET_ONE_PRODUCT";
+export const GET_ONE_PRODUCT_COMMENTARIES = "GET_ONE_PRODUCT_COMMENTARIES";
 export const ON_SUBMIT_REGISTER = "ON_SUBMIT_REGISTER";
 export const ON_SUBMIT_LOGIN = "ON_SUBMIT_LOGIN";
+export const GET_ALL_USERS = "GET_ALL_USERS"
 export const GET_USER_INFO = "GET_USER_INFO";
-export const ON_SUBMIT_CONTACT = "ON_SUBMIT_CONTACT";
+export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
+export const GET_ONE_PRODUCT = "GET_ONE_PRODUCT";
+export const ON_SUBMIT_COMMENTARY = "ON_SUBMIT_COMMENTARY";
 
-const ON_INPUT_CHANGE = "ON_INPUT_CHANGE";
+const SET_COMMENT_LIST = "SET_COMMENT_LIST";
 const SET_ONE_PRODUCT = "SET_ONE_PRODUCT";
+const SET_ALL_PRODUCTS = "SET_ALL_PRODUCTS";
+const ON_INPUT_CHANGE = "ON_INPUT_CHANGE";
+const ON_INPUT_PRODUCT_IMAGE_CHANGE = "ON_INPUT_PRODUCT_IMAGE_CHANGE";
 const SET_USER_LOGIN = "SET_USER_LOGIN";
 const SET_USER_INFO = "SET_USER_INFO";
 const CLEAN_REGISTER_FIELD = "CLEAN_REGISTER_FIELD";
@@ -214,6 +252,7 @@ const SET_ACTIVE_ITEM_USER_MENU = "SET_ACTIVE_ITEM_USER_MENU";
 const SET_FOUND_PRODUCT = "SET_FOUND_PRODUCT";
 const SET_SORTED_PRODUCT = "SET_SORTED_PRODUCT";
 const SET_RATING_PRODUCT = "SET_RATING_PRODUCT";
+const SET_ALL_USERS = "SET_ALL_USERS";
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
@@ -226,6 +265,11 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         activeItemUserMenu: !state.activeItemUserMenu,
+      }
+    case ON_INPUT_PRODUCT_IMAGE_CHANGE:
+      return {
+        ...state,
+        createProductImages: action.imageObject,
       }
     case ON_INPUT_CHANGE:
       return {
@@ -244,15 +288,30 @@ const reducer = (state = initialState, action = {}) => {
           firstName: action.firstName,
           lastName: action.lastName,
           userName: action.userName,
-          mail: action.mail,
-          role: action.role,
-          avatar: action.avatar,
+          email: action.email,
+          isAdmin: action.isAdmin,
+          avatar: action.avatar
         },
+      };
+    case SET_ALL_USERS:
+      return {
+        ...state,
+        users: action.allUsers
+      }
+    case SET_ALL_PRODUCTS:
+      return {
+        ...state,
+        products: action.allProducts
       };
     case SET_ONE_PRODUCT:
       return {
         ...state,
         oneProduct: action.oneProductFound,
+      };
+    case SET_COMMENT_LIST:
+      return {
+        ...state,
+        commentList: action.commentListFound
       };
     case SET_SORTED_PRODUCT:
       return {
@@ -268,7 +327,7 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         rating: state.products
-          .find((element) => element.id === action.productId)
+          .find((element) => element._id === action.productId)
           .rating.push(action.ratingValue),
       };
     case CLEAN_REGISTER_FIELD: {
@@ -281,6 +340,8 @@ const reducer = (state = initialState, action = {}) => {
         registerUserName: "",
         registerEmail: "",
         registerPassword: "",
+        registerPasswordConfirm: "",
+        newComment: "",
       };
     }
     default:
@@ -296,6 +357,21 @@ export const onInputChange = (name, value) => ({
   type: ON_INPUT_CHANGE,
   name,
   value,
+});
+export const onInputImageChange = (imageObject) => ({
+  type: ON_INPUT_PRODUCT_IMAGE_CHANGE,
+  imageObject
+})
+export const getAllProducts = () => ({
+  type: GET_ALL_PRODUCTS,
+})
+export const setAllProducts = (allProducts) => ({
+  type: SET_ALL_PRODUCTS,
+  allProducts
+});
+export const getOneProduct = (productId) => ({
+  type: GET_ONE_PRODUCT,
+  productId,
 });
 export const setOneProduct = (oneProductFound) => ({
   type: SET_ONE_PRODUCT,
@@ -327,26 +403,41 @@ export const setUsersLogin = (token) => ({
   type: SET_USER_LOGIN,
   token,
 });
-export const onSubmitContact = () => ({
-  type: ON_SUBMIT_CONTACT,
+export const onSubmitCemmentary = () => ({
+  type: ON_SUBMIT_COMMENTARY,
 });
+export const getOneProductCommentaries = (productId) => ({
+  type: GET_ONE_PRODUCT_COMMENTARIES,
+  productId
+})
+export const setCommentList = (commentListFound) => ({
+  type: SET_COMMENT_LIST,
+  commentListFound,
+})
 export const getUserInfo = () => ({
   type: GET_USER_INFO,
+});
+export const getAllUsers = () => ({
+  type: GET_ALL_USERS,
+})
+export const setAllUsers = (allUsers) => ({
+  type: SET_ALL_USERS,
+  allUsers
 });
 export const setUserInfo = (
   userName,
   firstName,
   lastName,
-  mail,
-  role,
+  email,
+  isAdmin,
   avatar
 ) => ({
   type: SET_USER_INFO,
   userName,
   firstName,
   lastName,
-  mail,
-  role,
-  avatar,
+  email,
+  isAdmin,
+  avatar
 });
 export default reducer;

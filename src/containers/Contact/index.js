@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 // imports locaux
 import Contact from '../../components/Contact';
 // import { onInputChange } from '../../../store/reducer';
-import { onInputChange, onSubmitContact } from '../../store/reducer';
+import { onInputChange} from '../../store/reducer';
 
 const mapStateToProps = state => ({
   contactFirstName: state.contactFirstName,
@@ -17,10 +17,7 @@ const mapDispatchToProps = dispatch => ({
 
   InputChange: (name, value) => {
     // console.log('dispatch');
-    dispatch(onInputChange(name, value));
-  },
-  onSubmitContact: () => {
-    dispatch(onSubmitContact());
+    dispatch(onInputChange(name, value)); 
   },
 });
 

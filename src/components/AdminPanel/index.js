@@ -1,73 +1,112 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Field from "containers/Login/Field/";
+import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+
 import "./adminpanel.scss";
 
-const AdminPanel = ({
-  InputChange,
-  creatProductTitle,
-  creatProductDescription,
-  creatProductPrice,
-  creatProductContent,
-}) => {
-  const handleChange = (event) => {
-    const { name: fieldName, value: fieldValue } = event.target;
-    InputChange(fieldName, fieldValue);
-  };
+import AddProductAdmin from 'containers/AdminPanel/AddProductAdmin';
+import ProductManagement from "./ProductManagement";
+import UsersManagement from "./UsersManagement";
+
+const User = ({userInfo, getUsers, getProducts, products, users, isAdmin, avatar}) => {
+
+  useEffect(() => {
+    userInfo();
+    getProducts();
+    getUsers();
+  }, []);
+
+
+  const menuItems = [
+      {component: <AddProductAdmin />, title: "Add a product"},
+      {
+        component: <ProductManagement
+                    allProducts={products}
+                    listProduct={getProducts}
+                  />, 
+        title: "Product Management"
+      },
+      {
+        component: <UsersManagement
+                    getUsers={getUsers}
+                    users={users}
+                  />,
+        title: "Manage users"
+    }
+  ]
+
+  const [showContent, setShowContent] = useState(menuItems[0].title);
+
+  const [ menuItemIndex, setMenuItemIndex] = useState(0)
 
   return (
+    isAdmin && (
+
     <div>
-      <div className="container3">
-        <h1>Ajouter un produit ou le modifier</h1>
+      {JSON.parse(sessionStorage.getItem("token")) && (
         <div>
-          <form className="container3-details">
-            <div className="container3-details_description">
-              <Field
-                placeholder="title"
-                type="text"
-                name="creatProductTitle"
-                value={creatProductTitle}
-              />
-              <Field
-                placeholder="Product description"
-                type="text"
-                name="creatProductDescription"
-                value={creatProductDescription}
-              />
-              <Field
-                placeholder="price"
-                type="number"
-                name="creatProductPrice"
-                value={creatProductPrice.toString()}
-              />
-              <div className="fieldgroup4">
-                <p>Content</p>
-                <textarea
-                  onChange={handleChange}
-                  cols="100"
-                  rows="10"
-                  name="creatProductContent"
-                  placeholder="Content *"
-                  type="text"
-                  value={creatProductContent}
+          <div className="wrapper">
+            <div className="wrapper-header">
+              <Link to="/user/Avatar" exact="true">
+                <div className="wrapper-header_avatar">
+                  <div className="wrapper-header_avatar_dl">
+                    <span>mettre à jour</span>
+                  </div>
+                    <img src={`http://localhost:3001/${avatar[0].filePath}`} alt="xxxx" />
+                </div>
+              </Link>
+              <div>
+                <img
+                  className="wrapper-header_img"
+                  src="img/banner.jfif"
+                  alt=""
                 />
               </div>
             </div>
-            <div className="container3-details_images">
-              <label>Select 4 images for the product</label>
-              <input type="file" className="form-control" multiple />
+          </div>
+          <div className="user-page">
+            <div className="user-page_links">
+              <Link to="/user" exact="true">
+                <button 
+                  className="bkg-white"
+                >
+                  My profile
+                </button>
+              </Link>
+              {menuItems.map((item, index) => (
+              <button
+                key={index}
+                onClick={(e) => {e.preventDefault(); setShowContent(item.title) ; setMenuItemIndex(index)} }
+                className={showContent === item.title ? "bkg-green" : "bkg-white"}
+              >
+                {item.title}
+              </button>
+              ))}
             </div>
-          </form>
+            <div className="user-page_content">
+              {menuItems[menuItemIndex].component}
+            </div>
+          </div>
         </div>
-      </div>
-      <div>
-        <form></form>
-      </div>
+      )}
+      {!JSON.parse(sessionStorage.getItem("token")) && (
+        <div>
+          <h1 className="error">YOU ARE NOT L0GIN </h1>
+          <img id="logo" src="/" alt="" />
+          <div>
+            <Link to="/login" exact>
+              {" "}
+              <h1>Please Sign in to Access your account</h1>{" "}
+            </Link>
+            <h3>Or</h3>
+            <Link className="link2" to="/" exact>
+              {" "}
+              <h1>Return to Home</h1>{" "}
+            </Link>
+          </div>
+        </div>
+      )}
     </div>
+    )
   );
 };
-
-AdminPanel.propTypes = {
-  InputChange: PropTypes.func.isRequired,
-};
-export default AdminPanel;
+export default User;

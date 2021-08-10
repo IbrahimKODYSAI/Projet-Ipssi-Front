@@ -11,9 +11,10 @@ import SignUp from "containers/SignUp";
 import Login from "containers/Login";
 import Contact from "containers/Contact";
 import User from "containers/User";
-import Article from "containers/Article";
 import AdminPanel from "containers/AdminPanel";
+import Article from "containers/Article";
 import "../App/app.scss";
+import "../../styles/utils.scss";
 
 export default function App() {
   return (
@@ -25,12 +26,14 @@ export default function App() {
         <Route path="/" exact component={Home} />
         <Route path="/article/:id" exact component={Article} />
         <Route path="/signup" exact component={SignUp} />
-        <Route path="/Login" excat component={Login} />
+        <Route path="/login" excat component={Login} />
         <Route path="/user" component={User} />
         <Route path="/forgotten-password" exact component={ForgottenPassword} />
         <Route path="/mention_legale" exact component={Legal} />
         <Route path="/contact" exact component={Contact} />
-        <Route path="/admin" exact component={AdminPanel} />
+        <Route path="/contact" exact component={Contact} />
+        <Route path="/user-admin-panel" exact component={AdminPanel} />
+
       </main>
       <div className="wrapper"></div>
       <footer className="footerix">

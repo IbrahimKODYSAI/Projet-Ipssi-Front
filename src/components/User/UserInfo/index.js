@@ -1,19 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+
 import './userinfos.scss';
 
-const UserInfo = () => {
+const UserInfo = ({
+    userInfo,
+    userName,
+    firstName,
+    lastName,
+    email,
+  }) => {
+  
+    useEffect(() => {
+      userInfo();
+    }, []);
+
+
     return (
         <div className="userInfo">
             <ul className="infoUser">
-                <li className="infos"><span className="infoClasse">Username :</span> Kodysai</li>
-                <li className="infos"><span className="infoClasse">Firstname :</span> Ibrahim</li>
-                <li className="infos"><span className="infoClasse">Lastname :</span> KODY SANEDA</li>
-                <li className="infos"><span className="infoClasse">Mail :</span> saneda.i@live.fr</li>
-                <li className="infos"><span className="infoClasse">Mots de passe :</span> azerty</li>
-                <li className="infos"><span className="infoClasse"><span role="img" aria-label="sheep">🃏 </span>Grade :</span> Admin</li>
+                <li className="infos"><span className="infoClasse">Username :</span> {userName}</li>
+                <li className="infos"><span className="infoClasse">Firstname :</span> {firstName}</li>
+                <li className="infos"><span className="infoClasse">Lastname :</span> {lastName}</li>
+                <li className="infos"><span className="infoClasse">Mail :</span> {email}</li>
             </ul>
         </div>
     )
 }
+
+UserInfo.propTypes = {
+  userInfo: PropTypes.func.isRequired,
+};
 
 export default UserInfo;

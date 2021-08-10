@@ -33,13 +33,6 @@ Field.propTypes = {
   InputChange: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
-  value: PropTypes.string,
-  type: PropTypes.string,
-};
-
-Field.defaultProps = {
-  type: "text",
-  value: "",
 };
 
 export default Field;

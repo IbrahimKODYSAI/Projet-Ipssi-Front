@@ -13,15 +13,18 @@
       width: 100%;
     }
     &_avatar{
-      border: 7px solid rgb(241, 13, 13);
+      border: 7px solid #f10d0d;
       border-radius: 50%;
       overflow: hidden;
+      display: flex;
       position: absolute;
       z-index: 200;
+      align-items: center;
+      justify-content: center;
       bottom: 0;
+      width: 150px;
+      height: 150px;
       left: 2em;
-      width: 110px;
-      height: 110px;
       &_dl{
         display: none;
         position: absolute;
@@ -38,7 +41,10 @@
         }
       }
       & img{
+        object-fit: cover;
+        height: 100%;
         width: 100%;
+        flex-grow: 0;
       }
     }
   }
@@ -64,46 +70,50 @@
 }
 
 .user-page {
+  padding: 16px;
   display: flex;
   flex-wrap: wrap;
   margin: 3em auto;
   max-width: 1200px;
+  justify-content: space-between;
 
   &_links {
-    width: 30%;
-    max-height: 150px;
-    padding-right: 20px;
+    width: 20%;
     display: flex;
+    justify-content: space-between;
+    height: 200px;
     flex-direction: column;
-    justify-content: space-around;
-    border: 1px solid black;
-    border-right: none;
+    border-radius: 8px;
+    background-color: #B9D9EB;
+    padding: 10px;
+
 
     & button {
-      height: 50px;
-      border-bottom: none;
-    }
+      min-width: 100%;
+      height: 50px;;
+      border-radius: 5px;
+      transition-duration: 0.3s;    }
   }
 
   &_content {
-    border: 1px solid black;
-    width: 70%;
-
-    &_show {
-      border: 1px solid red;
-    }
-
-    &_hide {
-      border: 1px solid red;
-      display: none;
-    }
+    width: 75%;
   }
 }
 
 .bkg-green {
   background-color: #62b3b4;
+  color: white;
 }
 
 .bkg-white {
   background-color: rgb(251, 245, 245);
+}
+
+.hide-button{
+  display: none;
+}
+
+.show-bhutton{
+  display: block;
+  background-color: rgb(201, 108, 108);
 }

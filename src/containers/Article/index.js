@@ -2,25 +2,42 @@ import { connect } from "react-redux";
 
 import Article from "components/Article";
 
-import { setOneProduct, setActiveItem, setRatingValue } from "store/reducer";
+import {
+  setActiveItem,
+  setRatingValue,
+  getOneProduct,
+  onInputChange,
+  onSubmitCemmentary,
+  getOneProductCommentaries
+} from "store/reducer";
 
 const mapStateToProps = (state) => ({
-  products: state.products,
   oneProduct: state.oneProduct,
   activeItemIndex: state.activeItemIndex,
   rating: state.rating,
+  newComment: state.newComment,
+  commentList: state.commentList,
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  getOneProduct:(productId) => {
+    dispatch(getOneProduct(productId))
+  },
+  getOneProductCommentaries:(productId) => {
+    dispatch(getOneProductCommentaries(productId))
+  },
+  onSubmitCemmentary: () => {
+    dispatch(onSubmitCemmentary())
+  },
   setItem: (index) => {
     dispatch(setActiveItem(index));
-  },
-  setOneProduct: (oneProductFound) => {
-    dispatch(setOneProduct(oneProductFound));
   },
   setRating: (ratingValue, productId) => {
     dispatch(setRatingValue(ratingValue, productId));
   },
+  onInputChange: (name, value) => {
+    dispatch(onInputChange(name, value));
+  }
 });
 
 const ArticleContainer = connect(mapStateToProps, mapDispatchToProps)(Article);
