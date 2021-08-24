@@ -9,42 +9,106 @@ const ProductManagement = ({listProduct, allProducts}) => {
         console.log(allProducts)
     }, []);
     
-      const [inputValues, setInputValues] = useState({
+    const [inputValues, setInputValues] = useState({
+
+    productName: "",
+    productTitle: "",
+    productPrice: 0,
+    productStock: 0,
+    productCategory: "",
+    productCategory2: "",
+    productCategory3: "",
+    productCategory4: "",
+    productImages: [],
+    productColor: "",
+    productColor2: "",
+    productColor3: "",
+    productColor4: "",
+    productDescription: "",
+    });
+
+    const categories = [
+        inputValues.productCategory,
+        inputValues.productCategory2,
+        inputValues.productCategory3,
+        inputValues.productCategory4,
+      ];
     
-        productName: "",
-        productTitle: "",
-        productPrice: 0,
-        productStock: 0,
-        productCategory: "",
-        productCategory2: "",
-        productCategory3: "",
-        productCategory4: "",
-        productImage: "",
-        productImage2: "",
-        productImage3: "",
-        productImage4: "",
-        productColor: "",
-        productColor2: "",
-        productColor3: "",
-        productColor4: "",
-        productDescription: "",
-      });
+      const colors = [
+        inputValues.productColor,
+        inputValues.productColor2,
+        inputValues.productColor3,
+        inputValues.productColor4,
+      ];
+    
 
-      const handleChange = (event) => {
-        const {name, value} = event.target;
+    const handleChange = (event) => {
+    const {name, value} = event.target;
         setInputValues({ ...inputValues, [name]: value })
-      };
+    };
 
+    const [show, setShow] = useState(false);
+    const [oneProduct, setOneProduct ] = useState([])
+    const [multipleImages, setMultipleImages] = useState([])
 
-      const [show, setShow] = useState(false);
-      const [oneProduct, setOneProduct ] = useState([])
+    const showPopUp = (e, product) => {
+        e.preventDefault()
+        setShow(!show)
+        if(product) setOneProduct(product)
+        console.log(oneProduct)
+    }
+    
+    const [urlImages, setUrlImages] = useState([])
 
-      const showPopUp = (e, product) => {
-          e.preventDefault()
-          setShow(!show)
-          if(product) setOneProduct(product)
-          console.log(oneProduct)
+    const handleImagesChange = (event) => {
+        const fileObj = [];
+        const fileArray = [];
+
+        fileObj.push(event.target.files);
+
+        for(let i = 0; i < fileObj[0].length; i ++){
+            fileArray.push(URL.createObjectURL(fileObj[0][i]))
         }
+        setMultipleImages(Array.from(event.target.files))
+        setUrlImages(fileArray)
+    }
+    
+    const handleUpdateProduct = async (e, _id) => {
+        e.preventDefault();
+        
+        const data = new FormData();
+        data.append('_id', _id)
+        data.append('name', inputValues.productName)
+        data.append('title', inputValues.productTitle)
+        data.append('price', inputValues.productPrice)
+        data.append('stock', inputValues.productStock)
+        for (let i = 0; i < categories.length; i++) {
+          data.append('categories', categories[i])
+        }
+        for (let i = 0; i < colors.length; i++) {
+          data.append('colors', colors[i])
+        }
+        data.append('description', inputValues.productDescription)
+        for (let i = 0; i < multipleImages.length; i++) {
+          data.append('files', multipleImages[i])
+        }
+      
+        await Axios.request({
+          url: 'http://localhost:3001/api/product/update',
+          method: 'put',
+          data,
+          headers: {
+            Authorization: JSON.parse(sessionStorage.getItem('token'))
+          }
+        }).then(response => {
+            console.log(response.data)
+            showPopUp(e)
+            listProduct();
+        }).catch(error => {
+            console.error(error.message);
+            console.error(error.response);
+        })
+    }
 
     const handleDeleteProperty = async (_id) => {
         console.log(_id)
@@ -68,36 +132,6 @@ const ProductManagement = ({listProduct, allProducts}) => {
         }
     };
 
-    const handleUpdateProduct = (e, _id) => {
-        console.log(e)
-        e.preventDefault();
-        const options = {
-            headers: {Authorization: JSON.parse(sessionStorage.getItem('token'))},
-        }
-
-            Axios.put ('http://localhost:3001/api/product/update',
-            {
-                _id,
-                name: inputValues.productName,
-                title: inputValues.productTitle,
-                price: inputValues.productPrice,
-                stock: inputValues.productStock,
-                categories: [
-                    inputValues.productCategory,
-                    inputValues.productCategory2,
-                    inputValues.productCategory3,
-                    inputValues.productCategory4,
-                ]
-            }, options
-            ).then(response => {
-                console.log(response.data)
-                showPopUp(e)
-                listProduct();
-            }).catch(error => {
-                console.error(error.message);
-                console.error(error.response);
-            })
-    }
 
 
     return (
@@ -219,34 +253,18 @@ const ProductManagement = ({listProduct, allProducts}) => {
                                 />
                         </div>
                         <div className="container5-group">
-                            <input
-                                placeholder="Image 1"
-                                type="text"
-                                name="productImage"
-                                value={inputValues.productImage}
-                                onChange={handleChange}
-                                />
-                                <input
-                                placeholder="Image 2"
-                                type="text"
-                                name="productImage2"
-                                value={inputValues.productImage2}
-                                onChange={handleChange}
-                                />
-                                <input
-                                placeholder="Image 3"
-                                type="text"
-                                name="productImage3"
-                                value={inputValues.productImage3}
-                                onChange={handleChange}
-                                />
-                                <input
-                                placeholder="Image 4"
-                                type="text"
-                                name="productImage4"
-                                value={inputValues.productImage4}
-                                onChange={handleChange}
-                                />
+                            <div>
+                                <input type="file" multiple onChange={handleImagesChange}/>
+                            </div>
+                            <div className="container5-group_imgDiv">
+                            
+                            {
+                                (urlImages || []).map(url => (
+                                    <img key={url} src={url} alt="" />
+                                ))
+                            }
+
+                            </div>
                         </div>
                     </div>
                     <div className="fieldgroup4">

@@ -1,12 +1,14 @@
 import { connect } from "react-redux";
 
 import Header from "components/Header";
-import { onInputChange, setFoundProduct } from "store/reducer";
+import { onInputChange, setFoundProduct, setToggleSideDrawer, getUserInfo } from "store/reducer";
 
 const mapStateToProps = (state) => ({
   inputSearchValue: state.inputSearchValue,
   products: state.products,
   foundProducts: state.foundProducts,
+  toggleSideDrawer: state.toggleSideDrawer,
+  userInfos: state.userInfo
 });
 
 const mapDispatchToProps = (Dispatch) => ({
@@ -15,6 +17,12 @@ const mapDispatchToProps = (Dispatch) => ({
   },
   setFoundedProduct: (foundProducts) => {
     Dispatch(setFoundProduct(foundProducts));
+  },
+  setToggleSideDrawer: (valuetrue) => {
+    Dispatch(setToggleSideDrawer(valuetrue))
+},
+  getUserInfo: () => {
+    Dispatch(getUserInfo());
   },
 });
 

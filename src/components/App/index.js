@@ -13,6 +13,10 @@ import Contact from "containers/Contact";
 import User from "containers/User";
 import AdminPanel from "containers/AdminPanel";
 import Article from "containers/Article";
+import Cart from "containers/Cart"
+
+import BergerMenu from "containers/BergerMenu"
+
 import "../App/app.scss";
 import "../../styles/utils.scss";
 
@@ -21,10 +25,12 @@ export default function App() {
     <div className="App">
       <div>
         <Header />
+        <BergerMenu />
       </div>
       <main className="p-dg">
         <Route path="/" exact component={Home} />
         <Route path="/article/:id" exact component={Article} />
+        <Route path="/cart" exact component={Cart}/>
         <Route path="/signup" exact component={SignUp} />
         <Route path="/login" excat component={Login} />
         <Route path="/user" component={User} />

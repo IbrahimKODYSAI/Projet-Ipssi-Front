@@ -40,6 +40,8 @@ const initialState = {
 
   foundProducts: [],
 
+  cart: [],
+
   products: [
     {
       _id: "1",
@@ -179,7 +181,7 @@ const initialState = {
     content: "",
     comments: [],
     colors: [],
-    rating: [],
+    ratings: [],
     count: null,
     date: "",
   },
@@ -207,6 +209,7 @@ const initialState = {
   ],
   activeItemUserMenu: false,
   activeItemIndex: 0,
+  toggleSideDrawer: false,
 
   createProductName: "",
   createProductTitle: "",
@@ -239,6 +242,8 @@ export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
 export const GET_ONE_PRODUCT = "GET_ONE_PRODUCT";
 export const ON_SUBMIT_COMMENTARY = "ON_SUBMIT_COMMENTARY";
 
+const SET_TOGGLE_SIDEDRAWER = "SET_TOGGLE_SIDEDRAWER";
+const SET_CART_ITEMS = "SET_CART_ITEMS";
 const SET_COMMENT_LIST = "SET_COMMENT_LIST";
 const SET_ONE_PRODUCT = "SET_ONE_PRODUCT";
 const SET_ALL_PRODUCTS = "SET_ALL_PRODUCTS";
@@ -265,6 +270,11 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         activeItemUserMenu: !state.activeItemUserMenu,
+      }
+    case SET_TOGGLE_SIDEDRAWER:
+      return {
+        ...state,
+        toggleSideDrawer: action.valuetrue,
       }
     case ON_INPUT_PRODUCT_IMAGE_CHANGE:
       return {
@@ -330,6 +340,11 @@ const reducer = (state = initialState, action = {}) => {
           .find((element) => element._id === action.productId)
           .rating.push(action.ratingValue),
       };
+    case SET_CART_ITEMS :
+      return {
+        ...state,
+        cart: action.item
+      }
     case CLEAN_REGISTER_FIELD: {
       return {
         ...state,
@@ -353,6 +368,10 @@ export const setActiveItem = (index) => ({
   type: SET_ACTIVE_ITEM,
   index,
 });
+export const setToggleSideDrawer = (valuetrue) => ({
+  type: SET_TOGGLE_SIDEDRAWER,
+  valuetrue
+})
 export const onInputChange = (name, value) => ({
   type: ON_INPUT_CHANGE,
   name,
@@ -369,6 +388,10 @@ export const setAllProducts = (allProducts) => ({
   type: SET_ALL_PRODUCTS,
   allProducts
 });
+export const setCartItems = (item) => ({
+  type: SET_CART_ITEMS,
+  item
+})
 export const getOneProduct = (productId) => ({
   type: GET_ONE_PRODUCT,
   productId,

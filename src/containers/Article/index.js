@@ -8,7 +8,9 @@ import {
   getOneProduct,
   onInputChange,
   onSubmitCemmentary,
-  getOneProductCommentaries
+  getOneProductCommentaries,
+  getAllProducts,
+  setCartItems
 } from "store/reducer";
 
 const mapStateToProps = (state) => ({
@@ -17,6 +19,7 @@ const mapStateToProps = (state) => ({
   rating: state.rating,
   newComment: state.newComment,
   commentList: state.commentList,
+  cart: state.cart
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -37,7 +40,13 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onInputChange: (name, value) => {
     dispatch(onInputChange(name, value));
-  }
+  },
+  getProducts: () => {
+    dispatch(getAllProducts());
+  },
+  setCartItem:(item) => {
+    dispatch(setCartItems(item))
+}
 });
 
 const ArticleContainer = connect(mapStateToProps, mapDispatchToProps)(Article);

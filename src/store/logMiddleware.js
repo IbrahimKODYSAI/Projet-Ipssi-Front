@@ -51,7 +51,7 @@ const logMiddleware = store => next => (action) => {
           .then((response) => {
             store.dispatch(setUsersLogin(response.data.token));
             sessionStorage.setItem('token', JSON.stringify(store.getState().token));
-            window.location.href = '/user';
+            window.location.href = '/';
           })
           // en cas d'echec : catch
           .catch((error) => {

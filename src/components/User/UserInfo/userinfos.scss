@@ -1,11 +1,54 @@
 .userInfo {
     width: 100%;
     margin: auto;
+    border-radius: 8px;
+    background-color: #B9D9EB;
+    max-width: 1300px;
+    height: auto;
+    border-radius: 8px;
     padding: 20px;
-    border: 2px solid lightgrey;
-    background-color: white;
     text-align: justify;
     font-size: 1.2em;
+
+    form{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      height: 30px;
+      input{
+        height: 28px;
+        border-radius: 5px;
+        padding-left: 5px;
+        border: none;
+      }
+
+    }
+
+
+    &_item{
+      text-align: left;
+      padding: 8px;
+      background-color: white;
+      margin: 10px 5px;
+      border-radius: 8px;
+      transition: 0.3s ease-in-out;
+
+      &_spanDiv{
+        display: inline-block;
+        min-width: 85px;
+      }
+
+      & i {
+        margin: 0px 10px;float: right;
+        cursor: pointer;
+      }
+    }
+
+    &_item:hover{
+      background-color: #62b3b4;
+      color: white;
+      
+    }
   
     @media screen and (max-width: 1000px) {
       width: 80%;
@@ -21,3 +64,17 @@
     margin-bottom: 15px;
   }
   
+
+  .pop-show{
+    display: block;
+    margin: 0 5px;
+  }
+
+  .pop-hide{
+    display: none;
+  }
+
+  .btn2-div{
+    padding: 0;
+    height: 28px;
+}

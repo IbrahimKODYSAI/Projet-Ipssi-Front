@@ -1,7 +1,7 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-// import { FaStar } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 import "../../styles/utils.scss"
 import "./article.scss";
 
@@ -16,26 +16,53 @@ function Article({
   onSubmitCemmentary,
   getOneProductCommentaries,
   commentList,
-  onInputChange
+  onInputChange,
+  getProducts,
+  cart,
+  setCartItem
 }) {
 
   
+  const Quantités = [1, 2, 3 , 4, 5]
+  
   useEffect(() => {
-    console.log(match.params.id)
-    getOneProduct(match.params.id);
+    getProducts();
+    getOneProduct(match.params.id); 
     getOneProductCommentaries(match.params.id);
   }, []);
-
+  
   const handleThumb = (index) => {
     setItem(index);
   };
+  // const [cart, setCartItem] = useState([])
+  const [quantityNumber, setQuantityNumber] = useState(1)
+  
+  const handleQuantity = (e) => {
+    setQuantityNumber(e.target.value)
+    console.log(quantityNumber)
+  }
 
-  // const getProductAverageRating = (rating) => {
-  //   if(rating.length > 0) {
-  //     const average = rating.reduce((a, b) => a + b) / rating.length;
-  //     return Math.round(average);
-  //   }
-  // };
+  const handleAddProduct = (oneProduct) => {
+    const productExist = cart.find((item) => item._id === oneProduct._id);
+    if(productExist){
+      setCartItem(
+        cart.map((item) => item._id === oneProduct._id 
+        ? { ...productExist, quantity : productExist.quantity + 1 } 
+        : item 
+      ));
+    }else{
+      setCartItem([...cart, { ...oneProduct, quantity: 1 }])
+    }
+    console.log(cart)
+  }
+  
+
+  const getProductAverageRating = (rating) => {
+    if(rating.length > 0) {
+      const average = rating.reduce((a, b) => a + b) / rating.length;
+      return Math.round(average);
+    }
+  };
 
   const handleChangeComment = (e) => {
     e.preventDefault()
@@ -62,7 +89,7 @@ function Article({
               <h2>{oneProduct.title}</h2>
               <span>{oneProduct.price} €</span>
             </div>
-            {/* <div className="box-star">
+            <div className="box-star">
               {[...Array(5)].map((star, i) => {
                 const ratingValue = i + 1;
                 return (
@@ -79,7 +106,7 @@ function Article({
                         className="star"
                         color={
                           ratingValue <=
-                          getProductAverageRating(oneProduct.rating)
+                          getProductAverageRating(oneProduct.ratings)
                             ? "#ffc107"
                             : "#e4e5e9"
                         }
@@ -87,14 +114,15 @@ function Article({
                   </label>
                 );
               })}
-              <p>{oneProduct.rating.length} évaluations</p>
-            </div> */}
-            <p>{oneProduct.description}</p>
-            <div className="colors">
-              {oneProduct.colors.map((color, index) => (
-                <button style={{ background: color }} key={index}></button>
-              ))}
+              {/* <p>{oneProduct.ratings.length} évaluations</p> */}
             </div>
+            <p>{oneProduct.description}</p>
+              <div className="colors">
+                {oneProduct.colors.map((color, index) => {
+                  return color !== "" ? <button style={{ background: color }} key={index}></button> : null
+                })}
+              </div>
+
             <div className="thumb">
               {oneProduct.images.map((img, index) => (
                 <img
@@ -107,16 +135,14 @@ function Article({
               ))}
             </div>
             <div className="shoes-size">
-              <span>Taille : </span>
-              {/* <select value="{optionsState}">
-                {oneProduct.size.map((size, index) => (
-                  <option value={size} key={index}>
-                    {size}
-                  </option>
-                ))}
-              </select> */}
+              <span>Quantité : </span>
+              <select name="quantity" onChange={handleQuantity}>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
             </div>
-            <button className="cart">Add to Cart</button>
+            <button className="cart" onClick={() => handleAddProduct(oneProduct)}>Add to Cart</button>
           </div>
         </div>
         <section className="commentary-section">
@@ -158,9 +184,9 @@ function Article({
                 <li key={comment._id}>
                   <div className="message">
                     <div className="divImg">
-                    {comment.author.avatar && (comment.author.avatar.length > 0 ) && (
-                      <img src={`http://localhost:3001/${comment.author.avatar[0].filePath}`} className="divImg-imagesize" alt="" />
-                    )}
+                      {comment.author.avatar && (comment.author.avatar.length > 0 ) && (
+                        <img src={`http://localhost:3001/${comment.author.avatar[0].filePath}`} className="divImg-imagesize" alt="" />
+                      )}
                     </div>
                     <div className="message-list_item">
                       <div id="userInfo">

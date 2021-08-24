@@ -14,10 +14,6 @@ const AddProductAdmin = () => {
     productCategory2: "",
     productCategory3: "",
     productCategory4: "",
-    productImage: "",
-    productImage2: "",
-    productImage3: "",
-    productImage4: "",
     productColor: "",
     productColor2: "",
     productColor3: "",
@@ -25,79 +21,85 @@ const AddProductAdmin = () => {
     productDescription: "",
   });
 
+  const categories = [
+    inputValues.productCategory,
+    inputValues.productCategory2,
+    inputValues.productCategory3,
+    inputValues.productCategory4,
+  ];
+
+  const colors = [
+    inputValues.productColor,
+    inputValues.productColor2,
+    inputValues.productColor3,
+    inputValues.productColor4,
+  ];
+
+  
+
   const handleChange = (event) => {
     const {name, value} = event.target;
     setInputValues({ ...inputValues, [name]: value })
   };
 
-  // const handleImagesChange = (event) => {
-  //   const imagesFiles = Array.from(event.target.files)
-  //   setInputValues({ ...inputValues, productImages: imagesFiles })
-  // }
+  const [multipleImages, setMultipleImages] = useState([])
+  const [urlImages, setUrlImages] = useState([])
 
-  // const fileSelectedHandler = event => {
-  //   const imagesFile = event.target.files[0];
-  //   console.log(imagesFile)
-  //   setInputValues({ ...inputValues, productImage: imagesFile})
-  // }
 
-  // const fileUploadHandler = (e) => {
-  //   e.preventDefault();
-  //   const fd = new FormData();
-  //   fd.append('image', inputValues.productImages[0], inputValues.productImages[0].name);
-  //   axios.put('http://localhost:3001/api/product/update/image/6107617383d7da58a8742034')
-  //   .then(res => {
-  //     console.log(res)
-  //   })
-  // }
+  const handleImagesChange = (event) => {
+    const fileObj = [];
+    const fileArray = [];
+
+    fileObj.push(event.target.files);
+
+    for(let i = 0; i < fileObj[0].length; i ++){
+        fileArray.push(URL.createObjectURL(fileObj[0][i]))
+    }
+    setMultipleImages(event.target.files)
+    setUrlImages(fileArray)
+  }
+
+  
 
   const submitProductHandler = async (e) => {
     e.preventDefault();
+
+    const data = new FormData();
+    data.append('name', inputValues.productName)
+    data.append('title', inputValues.productTitle)
+    data.append('price', inputValues.productPrice)
+    data.append('stock', inputValues.productStock)
+    for (let i = 0; i < categories.length; i++) {
+      data.append('categories', categories[i])
+    }
+    for (let i = 0; i < colors.length; i++) {
+      data.append('colors', colors[i])
+    }
+    data.append('description', inputValues.productDescription)
+    for (let i = 0; i < multipleImages.length; i++) {
+      data.append('files', multipleImages[i])
+    }
   
     await axios.request({
       url: 'http://localhost:3001/api/product/create',
       method: 'post',
-      data: {
-        name: inputValues.productName,
-        title: inputValues.productTitle,
-        description: inputValues.productDescription,
-        price: inputValues.productPrice,
-        stock: inputValues.productStock,
-        categories: [
-          inputValues.productCategory,
-          inputValues.productCategory2,
-          inputValues.productCategory3,
-          inputValues.productCategory4,
-        ],
-        images: [
-          inputValues.productImage,
-          inputValues.productImage2,
-          inputValues.productImage3,
-          inputValues.productImage4,
-        ],
-        colors: [
-          inputValues.productColor,
-          inputValues.productColor2,
-          inputValues.productColor3,
-          inputValues.productColor4,
-        ],
-      },
+      data,
       headers: {
         Authorization: JSON.parse(sessionStorage.getItem('token'))
       }
     })
     .then((response) => {
       console.log(response.data);
-      console.log(Object.keys(inputValues));
       console.log("product added successfuly")
-      return response
+      // console.log(Object.keys(inputValues));
+      // return response
     })
-    .then(() => {
-      Object.keys(inputValues).forEach((input) => {
-        console.log(input)
-        setInputValues({ ...inputValues, [input]: "" })
-      })
-    })
+    // .then(() => {
+    //   Object.keys(inputValues).forEach((input) => {
+    //     console.log(input)
+    //     setInputValues({ ...inputValues, [input]: "" })
+    //   })
+    // })
     // en cas d'echec : catch
     .catch((error) => {
       // console.error(error.message);
@@ -200,36 +202,20 @@ const AddProductAdmin = () => {
                   onChange={handleChange}
                 />
             </div>
-            <div className="container3-details_description_1">
-              <input
-                  placeholder="Image 1"
-                  type="text"
-                  name="productImage"
-                  value={inputValues.productImage}
-                  onChange={handleChange}
-                />
-                <input
-                  placeholder="Image 2"
-                  type="text"
-                  name="productImage2"
-                  value={inputValues.productImage2}
-                  onChange={handleChange}
-                />
-                <input
-                  placeholder="Image 3"
-                  type="text"
-                  name="productImage3"
-                  value={inputValues.productImage3}
-                  onChange={handleChange}
-                />
-                <input
-                  placeholder="Image 4"
-                  type="text"
-                  name="productImage4"
-                  value={inputValues.productImage4}
-                  onChange={handleChange}
-                />
-            </div>
+            <div className="container5-group">
+                            <div>
+                                <input type="file" multiple onChange={handleImagesChange}/>
+                            </div>
+                            <div className="container5-group_imgDiv">
+                            
+                            {
+                                (urlImages || []).map(url => (
+                                    <img key={url} src={url} alt="" />
+                                ))
+                            }
+
+                            </div>
+                        </div>
             <div className="fieldgroup4">
               <textarea
                 onChange={handleChange}

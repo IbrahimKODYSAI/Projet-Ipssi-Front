@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
+import Axios from "axios";
 
 import "./user.scss";
 
@@ -23,6 +24,34 @@ const User = ({ userInfo, isAdmin, avatar, }) => {
   const [showContent, setShowContent] = useState(menuItems[0].title);
 
   const [ menuItemIndex, setMenuItemIndex] = useState(0)
+  const [singleImage, setSingleImage] = useState([])
+
+  const handleImageChange = (event) => {
+    setSingleImage(event.target.files[0])
+}
+
+
+const handleUpdateAvatar = async (e) => {
+  e.preventDefault();
+  
+  const data = new FormData();
+  data.append('file', singleImage)
+
+  await Axios.request({
+    url: 'http://localhost:3001/api/user/update/avatar',
+    method: 'put',
+    data,
+    headers: {
+      Authorization: JSON.parse(sessionStorage.getItem('token'))
+    }
+  }).then(response => {
+      console.log(response.data)
+      userInfo();
+  }).catch(error => {
+      console.error(error.message);
+      console.error(error.response);
+  })
+}
 
   return (
     <div>
@@ -30,19 +59,18 @@ const User = ({ userInfo, isAdmin, avatar, }) => {
         <div>
           <div className="wrapper">
             <div className="wrapper-header">
-              <Link to="/user/Avatar" exact="true">
                 <div className="wrapper-header_avatar">
-                  {/* <div className="wrapper-header_avatar_dl">
-                    <span>mettre à jour</span>
-                  </div> */}
+                  <div className="wrapper-header_avatar_dl">
+                    <label htmlFor="file">update avatar</label>
+                    <input type="file" id="file" name="file" onChange={handleImageChange}/>
+                  </div>
                     {avatar && (avatar.length > 0 ) && (
                       <img src={`http://localhost:3001/${avatar[0].filePath}`} alt="xxxx" />
                     )}
                 </div>
-              </Link>
-              <div>
+                {/* <button onClick={(e) => handleUpdateAvatar(e)}>upload</button> */}
+              <div className="wrapper-header_img">
                 <img
-                  className="wrapper-header_img"
                   src="img/banner.jfif"
                   alt=""
                 />

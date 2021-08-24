@@ -38,16 +38,14 @@
     background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.4);
     z-index: 200;
+    transition-duration: 1s ease-in-out;
 
     & form {
         margin: 13% auto;
         padding: 16px;
         background-color: #B9D9EB;
-        width: 800px;
+        width: 50%;
         border-radius: 8px;
-        opacity: 1;
-        transition-duration: 0.5s ease-in-out;
-
         & h1{
             margin-bottom: 10px;
         }
@@ -61,6 +59,8 @@
 
 .popup-hide{
     display: none;
+    transition-duration: 1s ease-in-out;
+
 }
 .popup-div{
     position: fixed;
@@ -76,21 +76,45 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    width: 100%;
 
+    &-group{
+        // border: 1px solid red;
+        // width: 24%;
+        input{
+            float: left;
+            width: 90%;
+            height: 30px;
+            margin-bottom: 10px;
+            padding-left: 1em;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+          }
+          input:focus{
+            border: 1px solid orange;
+          }
 
+          &_imgDiv{
+              border: 1px solid black;
+              border-radius: 3px;
+              background-color: white;
 
-    input{
-        height: 30px;
-        display: block;
-        margin-bottom: 10px;
-        padding-left: 1em;
-        border-radius: 5px;
-        border: none;
-        outline: none;
-      }
-      input:focus{
-        border: 1px solid orange;
-      }
+              img{
+                  height: 60px;
+                  width: 60px;
+                  margin: 5px;
+              }
+          }
+          &_imgDiv>* {
+            flex: 1 1 20px;
+        }
+    }
+
+}
+
+.container5>* {
+    flex: 1 1 160px;
 }
 
 .btn-div{

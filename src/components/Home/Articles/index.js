@@ -17,7 +17,7 @@ const Articles = ({ getProducts, products, setSortedProducts }) => {
       <section id="article-section">
         <div className="c-wings c-wings--sm">Articles populaire</div>
         <div className="container1">
-          {products.slice(0, 6).map((item) => (
+          {products.slice(0, 12).map((item) => (
             <article key={item._id} className="container1-article">
               <div className="container1-article_imgbox">
                 <Link to={`/article/${item._id}`} exact="true">
@@ -27,12 +27,12 @@ const Articles = ({ getProducts, products, setSortedProducts }) => {
               <div className="container1-article_label">
                 <h3>{item.title.slice(0, 30)}...</h3>
                 <span>{item.price} €</span>
-                <Link to="" exact="true">
+                {/* <Link to="" exact="true">
                   <i className="delete fa fa-trash"></i>
                 </Link>
                 <Link to="" exact="true">
                   <i className="update fa fa-wrench"></i>
-                </Link>
+                </Link> */}
               </div>
             </article>
           ))}

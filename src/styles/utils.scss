@@ -1,7 +1,6 @@
 .btn{
     margin: 0 10px;
     width: 90px;
-    border: none;
     height: 30px;
     border-radius: 3px;
 
@@ -17,6 +16,70 @@
 
     &-warning{
         background-color: rgb(245, 45, 45);
+        color: white;
+    }
+}
+
+
+.btn-circle{
+    margin: auto 5px;
+    width: 26px;
+    height: 26px;
+    border: none;
+    border-radius: 26px;
+    font-size: 0.5em;
+    font-weight: bold;
+
+    &-primary{
+        border: 1px solid rgb(42, 138, 255);
+        color: white;
+    }
+    &-primary:hover{
+        background-color: rgb(42, 138, 255);
+        color: white;
+    }
+
+    &-success{
+        border: 1px solid #32de84;
+        color: #32de84;
+    }
+    &-success:hover{
+        background-color: #32de84;
+        color: white;
+    }
+
+    &-warning{
+        border: 1px solid #E52B50;
+        color: #E52B50;
+    }
+    &-warning:hover{
+        background-color: #E52B50;
+        color: white;
+    }
+}
+
+
+.btn3{
+    margin: auto 5px;
+    width: 55px;
+    height: 28px;
+    border: none;
+    border-radius: 3px;
+    font-size: 0.5em;
+    font-weight: bold;
+
+    &-primary{
+        background-color: rgb(42, 138, 255);
+        color: white;
+    }
+
+    &-success{
+        background-color: #32de84;
+        color: white;
+    }
+
+    &-warning{
+        background-color: #E52B50;
         color: white;
     }
 }
