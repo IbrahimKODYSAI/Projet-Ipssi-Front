@@ -15,13 +15,27 @@ const Header = ({
   setFoundedProduct,
   setToggleSideDrawer,
   getUserInfo,
-  userInfos
+  userInfos,
+  cartItems
 }) => {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
     getUserInfo()
   }, [])
+
+  const ItemQty = () => {
+    if(cartItems.length > 0) {
+      const allItemQty = cartItems.map((item) => item.quantity)
+      return allItemQty.reduce((a, b) => {return a +b }, 0)
+    }else {
+      return 0
+    }
+  };
+
+  
+
+  // const totalItemInCart = allItemQty.reduce((a, b) => {return a +b }, 0)
 
   const props = {
     inputSearchValue,
@@ -37,9 +51,9 @@ const Header = ({
         <div className="navbar-top">
           <div className="navbar-top_logo media-up_960" >
             <div className="navbar-top_logo_img" >
-              <a href="/">
+            <Link to="/" exact="true">
                 <img src={LOGO} alt="" />
-              </a>
+            </Link>
             </div>
             <Link to="/" exact="true">
               <p>BIGOODEAL</p>
@@ -72,7 +86,7 @@ const Header = ({
                 </Link>
                 <Link to="/cart" exact="true">
                   <i className="fa fa-shopping-cart">
-                    <span className="cratlogo_badge">0</span>
+                    <span className="cratlogo_badge">{ItemQty()}</span>
                   </i>
                 </Link>
             </div>
@@ -84,7 +98,9 @@ const Header = ({
                           <p>Bonjour {userInfos.userName}... </p>
                       </Link>
                       <div className="navbar-top_account_Button_avatar" onClick={() => setShow(!show)}>
+                        {userInfos.avatar > 0 && (
                           <img src={`http://localhost:3001/${userInfos.avatar[0].filePath}`} alt="xxxx" />
+                        )}
                       </div>
                       {show && (
                         <div className="navbar-top_account_Button_avatar_dropdown">
@@ -103,7 +119,7 @@ const Header = ({
                 <Link to="/cart" exact="true" className="cart_link">
                   <h3>
                     <i className="fa fa-shopping-cart">
-                      <span className="cartlogo_badge">10</span>
+                      <span className="cartlogo_badge">{ItemQty()}</span>
                     </i>
                   </h3>
                 </Link>

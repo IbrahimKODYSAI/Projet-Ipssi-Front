@@ -40,7 +40,7 @@ const initialState = {
 
   foundProducts: [],
 
-  cart: [],
+  cartItems: [],
 
   products: [
     {
@@ -232,7 +232,7 @@ const initialState = {
 
 
 };
-
+export const ON_SUBMIT_CART = "ON_SUBMIT_CART";
 export const GET_ONE_PRODUCT_COMMENTARIES = "GET_ONE_PRODUCT_COMMENTARIES";
 export const ON_SUBMIT_REGISTER = "ON_SUBMIT_REGISTER";
 export const ON_SUBMIT_LOGIN = "ON_SUBMIT_LOGIN";
@@ -244,6 +244,9 @@ export const ON_SUBMIT_COMMENTARY = "ON_SUBMIT_COMMENTARY";
 
 const SET_TOGGLE_SIDEDRAWER = "SET_TOGGLE_SIDEDRAWER";
 const SET_CART_ITEMS = "SET_CART_ITEMS";
+const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+const SET_CARTITEM_QTY_PLUS = "SET_CARTITEM_QTY_PLUS";
+const SET_CARTITEM_QTY_MINUS = "SET_CARTITEM_QTY_MINUS";
 const SET_COMMENT_LIST = "SET_COMMENT_LIST";
 const SET_ONE_PRODUCT = "SET_ONE_PRODUCT";
 const SET_ALL_PRODUCTS = "SET_ALL_PRODUCTS";
@@ -340,10 +343,25 @@ const reducer = (state = initialState, action = {}) => {
           .find((element) => element._id === action.productId)
           .rating.push(action.ratingValue),
       };
-    case SET_CART_ITEMS :
+    case SET_CART_ITEMS:
       return {
         ...state,
-        cart: action.item
+        cartItems: action.cart
+      }
+    case SET_CARTITEM_QTY_PLUS:
+      return {
+        ...state,
+        cartItems: action.cart
+      }
+    case SET_CARTITEM_QTY_MINUS:
+      return {
+        ...state,
+        cartItems: action.cart
+      }
+    case REMOVE_FROM_CART:
+      return {
+        ...state,
+        cartItems: state.cartItems.filter((x) => x._id !== action.product._id)
       }
     case CLEAN_REGISTER_FIELD: {
       return {
@@ -388,9 +406,24 @@ export const setAllProducts = (allProducts) => ({
   type: SET_ALL_PRODUCTS,
   allProducts
 });
-export const setCartItems = (item) => ({
+export const setCartItems = (cart) => ({
   type: SET_CART_ITEMS,
-  item
+  cart
+});
+export const removeProduct = (product) => ({
+  type: REMOVE_FROM_CART,
+  product
+});
+export const setCartItemQty = (cart) => ({
+  type: SET_CARTITEM_QTY_PLUS,
+  cart
+});
+export const setCartItemQtyMinus = (cart) => ({
+  type: SET_CARTITEM_QTY_MINUS,
+  cart
+});
+export const onSubmitCart = () => ({
+  type: ON_SUBMIT_CART,
 })
 export const getOneProduct = (productId) => ({
   type: GET_ONE_PRODUCT,

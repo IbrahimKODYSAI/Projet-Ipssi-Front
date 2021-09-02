@@ -62,6 +62,7 @@
     background: white;
     border-radius: 2px;
     place-items: center;
+    text-align: left;
 
     &_image{
         img{
@@ -81,6 +82,22 @@
 
     &_select{
         padding: 10px 10px;
+        display: flex;
+        align-items: center;
+        i{
+            margin: auto 8px;
+            font-size: 1.5rem;
+            color: black;
+        }
+        // &_plus{
+        //     color: green;
+        // }
+        // &_minus{
+        //     color: red;
+        // }
+        span{
+            font-size: 1.2rem;
+        }
     }
 
     &_deleteBtn {
@@ -91,9 +108,7 @@
         cursor: pointer;
         transition: all 0.3s ease-out;
     }
-    &_deleteBtn:hover,
-    &_deleteBtn:focus,
-    &_deleteBtn:active {
+    &_deleteBtn:active{
         background: #171717;
         transform: sclae(1.2);
     }
@@ -106,7 +121,17 @@
         &_name{
             font-size: 0.8rem;
         }
-        &_select,
+        &_select {
+            padding: 8px 13px;
+            i{
+                margin: auto 8px;
+                font-size: 1rem;
+                color: black;
+            }
+            span{
+                font-size: 0.8rem;
+            }
+        }
         &_deleteBtn {
             padding: 8px 13px;
         }
@@ -122,7 +147,17 @@
         &_name{
             font-size: 0.6rem;
         }
-        &_select,
+        &_select {
+            padding: 5px 8px;
+            i{
+                margin: auto 8px;
+                font-size: 1rem;
+                color: black;
+            }
+            span{
+                font-size: 0.6rem;
+            }
+        }
         &_deleteBtn {
             padding: 5px 8px;
         }

@@ -17,21 +17,21 @@ const User = ({userInfo, getUsers, getProducts, products, users, isAdmin, avatar
 
 
   const menuItems = [
-      {component: <AddProductAdmin />, title: "Add a product"},
-      {
-        component: <ProductManagement
-                    allProducts={products}
-                    listProduct={getProducts}
-                  />, 
-        title: "Product Management"
-      },
-      {
-        component: <UsersManagement
-                    getUsers={getUsers}
-                    users={users}
-                  />,
-        title: "Manage users"
-    }
+    {
+      component: <ProductManagement
+      allProducts={products}
+      listProduct={getProducts}
+      />, 
+      title: "Product Management"
+    },
+    {
+      component: <UsersManagement
+      getUsers={getUsers}
+      users={users}
+      />,
+      title: "Manage users"
+    },
+    {component: <AddProductAdmin />, title: "Add a product"},
   ]
 
   const [showContent, setShowContent] = useState(menuItems[0].title);

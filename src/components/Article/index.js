@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 import "../../styles/utils.scss"
 import "./article.scss";
+import axios from "axios";
 
 function Article({
   getOneProduct,
@@ -18,12 +19,10 @@ function Article({
   commentList,
   onInputChange,
   getProducts,
-  cart,
-  setCartItem
+  cartItems,
+  AddCartItems,
+  onSubmitCart
 }) {
-
-  
-  const Quantités = [1, 2, 3 , 4, 5]
   
   useEffect(() => {
     getProducts();
@@ -31,33 +30,46 @@ function Article({
     getOneProductCommentaries(match.params.id);
   }, []);
   
+  
+  const [quantity, setQuantity] = useState(1)
+
+
+  const cartItem = {
+    _id: oneProduct._id,
+    images: oneProduct.images[0].filePath,
+    name: oneProduct.name,
+    price: oneProduct.price,
+    quantity: quantity
+  }
+
+  const handleAddCartItem = async (e, cartItem) => {  
+    e.preventDefault();
+    try {
+      const existItem = cartItems.find((item) => item._id === cartItem._id)
+      if(existItem) {
+        AddCartItems(
+          cartItems.map((item) => 
+            item._id === existItem._id 
+            ? { ...existItem, quantity: existItem.quantity + quantity }
+            : item
+          ))
+      }else {
+          AddCartItems([...cartItems, { ...cartItem, quantity: quantity}])
+      }
+      await onSubmitCart()
+    }catch (error) {
+        console.log('user cart update failed')
+    }
+
+
+
+  }
+
   const handleThumb = (index) => {
     setItem(index);
   };
-  // const [cart, setCartItem] = useState([])
-  const [quantityNumber, setQuantityNumber] = useState(1)
-  
-  const handleQuantity = (e) => {
-    setQuantityNumber(e.target.value)
-    console.log(quantityNumber)
-  }
 
-  const handleAddProduct = (oneProduct) => {
-    const productExist = cart.find((item) => item._id === oneProduct._id);
-    if(productExist){
-      setCartItem(
-        cart.map((item) => item._id === oneProduct._id 
-        ? { ...productExist, quantity : productExist.quantity + 1 } 
-        : item 
-      ));
-    }else{
-      setCartItem([...cart, { ...oneProduct, quantity: 1 }])
-    }
-    console.log(cart)
-  }
-  
-
-  const getProductAverageRating = (rating) => {
+  const getProductAverageRating = (rating) => { 
     if(rating.length > 0) {
       const average = rating.reduce((a, b) => a + b) / rating.length;
       return Math.round(average);
@@ -136,13 +148,13 @@ function Article({
             </div>
             <div className="shoes-size">
               <span>Quantité : </span>
-              <select name="quantity" onChange={handleQuantity}>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
+              <select value={quantity} onChange={(e) => setQuantity(Number(e.target.value))}>
+                <option value={1}>1</option>
+                <option value={2}>2</option>
+                <option value={3}>3</option>
               </select>
             </div>
-            <button className="cart" onClick={() => handleAddProduct(oneProduct)}>Add to Cart</button>
+            <button className="cart" onClick={(e) => handleAddCartItem(e, cartItem)}>Add to Cart</button>
           </div>
         </div>
         <section className="commentary-section">
@@ -210,3 +222,21 @@ function Article({
 //   product: PropTypes.object.isRequired,
 // };
 export default Article;
+
+
+
+
+
+  // const handleAddProduct = (oneProduct) => {
+  //   const productExist = cart.find((item) => item._id === oneProduct._id);
+  //   if(productExist){
+  //     setCartItem(
+  //       cart.map((item) => item._id === productExist._id
+  //       ? { ...oneProduct, quantity : oneProduct.quantity + 1 } 
+  //       : item 
+  //     ));
+  //   }else{
+  //     setCartItem([...cart, { ...oneProduct, quantity: 1 }])
+  //   }
+  //   console.log(cart)
+  // }

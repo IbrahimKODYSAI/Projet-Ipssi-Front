@@ -2,53 +2,104 @@ import { connect } from "react-redux";
 
 import Article from "components/Article";
 
-import {
-  setActiveItem,
-  setRatingValue,
-  getOneProduct,
-  onInputChange,
-  onSubmitCemmentary,
-  getOneProductCommentaries,
-  getAllProducts,
-  setCartItems
-} from "store/reducer";
-
 const mapStateToProps = (state) => ({
   oneProduct: state.oneProduct,
   activeItemIndex: state.activeItemIndex,
   rating: state.rating,
   newComment: state.newComment,
   commentList: state.commentList,
-  cart: state.cart
+  cartItems: state.cartItems
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  getOneProduct:(productId) => {
-    dispatch(getOneProduct(productId))
+const mapDispatchToProps = {
+  AddCartItems: (cart) => {
+    return {
+      type: 'SET_CART_ITEMS',
+      cart
+    }
   },
-  getOneProductCommentaries:(productId) => {
-    dispatch(getOneProductCommentaries(productId))
+  onSubmitCart: () => {
+    return {
+      type: 'ON_SUBMIT_CART'
+    }
+  },
+  getOneProduct: (productId) => {
+    return {
+      type: 'GET_ONE_PRODUCT',
+      productId
+    }
+  },
+  getOneProductCommentaries: (productId) => {
+    return {
+      type: 'GET_ONE_PRODUCT_COMMENTARIES',
+      productId
+    }
   },
   onSubmitCemmentary: () => {
-    dispatch(onSubmitCemmentary())
+    return {
+      type: 'ON_SUBMIT_COMMENTARY'
+    }
   },
   setItem: (index) => {
-    dispatch(setActiveItem(index));
+    return {
+      type: 'SET_ACTIVE_ITEM',
+      index
+    }
   },
   setRating: (ratingValue, productId) => {
-    dispatch(setRatingValue(ratingValue, productId));
+     return {
+      type: 'SET_RATING_PRODUCT',
+      ratingValue,
+      productId,
+     }
   },
   onInputChange: (name, value) => {
-    dispatch(onInputChange(name, value));
+    return {
+      type: 'ON_INPUT_CHANGE',
+      name,
+      value,
+    }
   },
   getProducts: () => {
-    dispatch(getAllProducts());
+    return {
+      type: 'GET_ALL_PRODUCTS',
+    }
   },
-  setCartItem:(item) => {
-    dispatch(setCartItems(item))
+
 }
-});
 
 const ArticleContainer = connect(mapStateToProps, mapDispatchToProps)(Article);
 
 export default ArticleContainer;
+
+
+
+
+
+
+// const mapDispatchToProps = (dispatch) => ({
+//   getOneProduct:(productId) => {
+//     dispatch(getOneProduct(productId))
+//   },
+//   getOneProductCommentaries:(productId) => {
+//     dispatch(getOneProductCommentaries(productId))
+//   },
+//   onSubmitCemmentary: () => {
+//     dispatch(onSubmitCemmentary())
+//   },
+//   setItem: (index) => {
+//     dispatch(setActiveItem(index));
+//   },
+//   setRating: (ratingValue, productId) => {
+//     dispatch(setRatingValue(ratingValue, productId));
+//   },
+//   onInputChange: (name, value) => {
+//     dispatch(onInputChange(name, value));
+//   },
+//   getProducts: () => {
+//     dispatch(getAllProducts());
+//   },
+//   AddCartItems: (qty) => {
+//     dispatch(setCartItems(qty))
+// }
+// });

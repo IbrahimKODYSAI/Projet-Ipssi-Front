@@ -14,6 +14,7 @@ const BergerMenu = ({
     setToggleSideDrawer,
     userInfo,
     userInfos,
+    cartItems
 }) => {
 
     const props = {
@@ -33,6 +34,7 @@ const BergerMenu = ({
                 click={() => setToggleSideDrawer(false)}
                 getUserInfo={userInfo}
                 userInfos={userInfos}
+                cartItems={cartItems}
             />
         </div>
     )

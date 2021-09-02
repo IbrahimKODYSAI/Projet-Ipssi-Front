@@ -16,6 +16,7 @@ import {
   setUserInfo,
   GET_ALL_PRODUCTS,
   setAllProducts,
+  ON_SUBMIT_CART,
 } from '../store/reducer';
 const logMiddleware = store => next => (action) => {
     // console.log('Je suis le middleware, et je laisse passer cette action: ', action);
@@ -57,6 +58,7 @@ const logMiddleware = store => next => (action) => {
           .catch((error) => {
             console.error(error.message, 'Username or Password does not exists');
             console.error(error.response);
+            window.alert('Username or Password does not exists')
           });
         break;
       case GET_ALL_USERS:
@@ -153,6 +155,24 @@ const logMiddleware = store => next => (action) => {
             store.dispatch(cleanRegisterFields());
           })
         break;
+      case ON_SUBMIT_CART:
+        axios.request({
+          url: 'http://localhost:3001/api/user/cart',
+          method: 'put',
+          data: {
+            cartItems: store.getState().cartItems
+          },
+          headers: {
+            Authorization: JSON.parse(sessionStorage.getItem('token'))
+          }
+        })
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error.response);
+        });
+      break;
       default:
          next(action);
     }

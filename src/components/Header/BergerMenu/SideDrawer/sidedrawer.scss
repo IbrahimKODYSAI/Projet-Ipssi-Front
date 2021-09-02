@@ -1,7 +1,7 @@
 .sidedrawer {
     width: 70%;
     height: 100vh;
-    background-color: #121125;
+    background-color: #212529;
     color: white;
     position: fixed;
     top: 0;
@@ -15,15 +15,15 @@
     transform: translateX(0);
 }
 
-.sidedrawer_Button{
+.sidedrawer_Button_logged{
+    background-color: #0c1016;
     border-bottom: 1px solid grey;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    display: flex;
     padding: 20px 10px;
-
     p{
-        margin: auto 10px;
+        text-align: justify;
+        margin: 10px;
     }
     &_img{
         display: flex;
@@ -34,6 +34,7 @@
         overflow: hidden;
         width: 60px;
         height: 60px;
+        margin: 10px;
         img{
             object-fit: cover;
             height: 100%;
@@ -41,6 +42,24 @@
             flex-grow: 0;
         }
     }
+
+    button{
+        margin: auto 5px;
+        height: 2.8em;
+    }
+}
+
+.mail{
+    font-size: 0.8em;
+    color: lightgray;
+}
+
+.sidedrawer_Button{
+    border-bottom: 1px solid grey;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding: 20px 10px;
 
     button{
         margin: auto 5px;
@@ -56,7 +75,7 @@
 
 .sidedrawer_cart{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     padding: 20px;
     i{
         display: flex;
@@ -81,7 +100,21 @@
 
 .sidedrawer_links{
     text-align: justify;
+    font-size: 1.2em;
     li{
-        padding: 20px;
+        transition: 0.5s ease-in-out;
+        padding: 30px;
+        i{
+            color: #495057;
+            margin-right: 30px;
+        }
+
+    }
+    li:hover{
+        color: black;
+        background-color: white;
+        i{
+            color: black;
+        }
     }
 }

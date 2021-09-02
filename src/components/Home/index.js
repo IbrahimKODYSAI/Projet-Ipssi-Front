@@ -24,15 +24,17 @@ const Home = () => {
                     <button className="btn2" >
                         Nouveautés</button>
                     <button className="btn3" >
-                        Meilleures Ventes</button>
+                        Meilleures Ventes</button> 
                 </div>
                 <div>
                     <button className="btn4">
                     Promotions</button>
                 </div>
             </div>
-            <Articles />
-
+            <div className="product-div">
+                <h3 className="product-div_title">Nouveautés</h3>
+                <Articles />
+            </div>
         </div>
 )}
 

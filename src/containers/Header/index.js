@@ -8,7 +8,8 @@ const mapStateToProps = (state) => ({
   products: state.products,
   foundProducts: state.foundProducts,
   toggleSideDrawer: state.toggleSideDrawer,
-  userInfos: state.userInfo
+  userInfos: state.userInfo,
+  cartItems: state.cartItems
 });
 
 const mapDispatchToProps = (Dispatch) => ({
