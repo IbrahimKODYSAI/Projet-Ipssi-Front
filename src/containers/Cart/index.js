@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 
 import Cart from "components/Cart";
 
-import { removeProduct, setCartItemQty, setCartItemQtyMinus, onSubmitCart } from "store/reducer";
+import { setCartItems, onSubmitCart } from "store/reducer";
 
 const mapStateToProps = (state)=> ({
     cart: state.cartItems
@@ -10,14 +10,8 @@ const mapStateToProps = (state)=> ({
 
 
 const mapDispatchToProps = (dispatch) => ({
-    removeProduct:(product) => {
-        dispatch(removeProduct(product))
-    },
-    setCartItemQty:(cart) => {
-        dispatch(setCartItemQty(cart))
-    },
-    setCartItemQtyMinus:(cart) => {
-        dispatch(setCartItemQtyMinus(cart))
+    setCartItems:(cart) => {
+        dispatch(setCartItems(cart))
     },
     onSubmitCart:() => {
         dispatch(onSubmitCart())

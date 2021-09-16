@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 
 import Header from "components/Header";
-import { onInputChange, setFoundProduct, setToggleSideDrawer, getUserInfo } from "store/reducer";
+import { setCartItems, onInputChange, setFoundProduct, setToggleSideDrawer, getUserInfo } from "store/reducer";
 
 const mapStateToProps = (state) => ({
   inputSearchValue: state.inputSearchValue,
@@ -25,6 +25,9 @@ const mapDispatchToProps = (Dispatch) => ({
   getUserInfo: () => {
     Dispatch(getUserInfo());
   },
+  setCartItems:(cart) => {
+    Dispatch(setCartItems(cart))
+},
 });
 
 const HeaderContainer = connect(mapStateToProps, mapDispatchToProps)(Header);

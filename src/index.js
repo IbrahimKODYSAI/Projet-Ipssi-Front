@@ -4,15 +4,22 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import './styles/index.scss';
 import { Provider } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
 
 //import locaux
 import App from './components/App';
 import store from './store';
 
+
+const stripePromise = loadStripe(process.env.REACT_APP_PUBLISHABLE_KEY);
+
 ReactDOM.render((
   <Provider store={store}>
     <Router>
-      <App />
+      <Elements stripe={stripePromise}>
+        <App/>
+      </Elements>
     </Router>
   </Provider>
 ),document.getElementById('root'));

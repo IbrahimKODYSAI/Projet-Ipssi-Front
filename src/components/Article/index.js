@@ -2,9 +2,8 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
-import "../../styles/utils.scss"
-import "./article.scss";
-import axios from "axios";
+import "../../styles/utils.scss";
+import "./article.scss"
 
 function Article({
   getOneProduct,
@@ -20,14 +19,19 @@ function Article({
   onInputChange,
   getProducts,
   cartItems,
-  AddCartItems,
+  setCartItems,
   onSubmitCart
 }) {
   
+  let getLocalCart = localStorage.getItem("cart")
+
   useEffect(() => {
     getProducts();
     getOneProduct(match.params.id); 
     getOneProductCommentaries(match.params.id);
+    let localCart = JSON.parse(getLocalCart)
+    if (localCart) setCartItems(localCart)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   
   
@@ -38,6 +42,7 @@ function Article({
     _id: oneProduct._id,
     images: oneProduct.images[0].filePath,
     name: oneProduct.name,
+    title: oneProduct.title,
     price: oneProduct.price,
     quantity: quantity
   }
@@ -47,22 +52,26 @@ function Article({
     try {
       const existItem = cartItems.find((item) => item._id === cartItem._id)
       if(existItem) {
-        AddCartItems(
+        let strinCopy = JSON.stringify(
           cartItems.map((item) => 
-            item._id === existItem._id 
-            ? { ...existItem, quantity: existItem.quantity + quantity }
-            : item
-          ))
+          item._id === existItem._id 
+          ? { ...existItem, quantity: existItem.quantity + quantity }
+          : item
+        ))
+        localStorage.setItem("cart", strinCopy)
       }else {
-          AddCartItems([...cartItems, { ...cartItem, quantity: quantity}])
+        let strinCopy = JSON.stringify([...cartItems, { ...cartItem, quantity: quantity}])
+        localStorage.setItem("cart", strinCopy)
       }
+
+      let getLocalCart = localStorage.getItem("cart")
+      let localCart = JSON.parse(getLocalCart)
+      setCartItems(localCart)
+
       await onSubmitCart()
     }catch (error) {
         console.log('user cart update failed')
     }
-
-
-
   }
 
   const handleThumb = (index) => {

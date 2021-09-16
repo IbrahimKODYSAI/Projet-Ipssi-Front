@@ -11,6 +11,7 @@ const Articles = ({ getProducts, products, setSortedProducts }) => {
   useEffect(() => {
     sortProducts();
     getProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className="product_screen">

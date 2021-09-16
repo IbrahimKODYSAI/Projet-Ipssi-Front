@@ -6,6 +6,7 @@ import "./usersmanegement.scss"
 const UsersManagement = ({getUsers, users}) => {
     useEffect(() => {
         getUsers();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     console.log(users)
 

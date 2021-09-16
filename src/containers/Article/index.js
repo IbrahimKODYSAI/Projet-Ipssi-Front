@@ -12,7 +12,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  AddCartItems: (cart) => {
+  setCartItems: (cart) => {
     return {
       type: 'SET_CART_ITEMS',
       cart

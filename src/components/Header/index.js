@@ -16,12 +16,19 @@ const Header = ({
   setToggleSideDrawer,
   getUserInfo,
   userInfos,
-  cartItems
+  cartItems,
+  setCartItems,
 }) => {
   const [show, setShow] = useState(false);
 
+  const getLocalCart = localStorage.getItem("cart");
+
   useEffect(() => {
     getUserInfo()
+    
+    let localCart = JSON.parse(getLocalCart);
+    if (localCart) setCartItems(localCart)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const ItemQty = () => {
@@ -32,8 +39,6 @@ const Header = ({
       return 0
     }
   };
-
-  
 
   // const totalItemInCart = allItemQty.reduce((a, b) => {return a +b }, 0)
 
@@ -96,9 +101,10 @@ const Header = ({
                 <div className="navbar-top_account_Button">
                       <Link to="/user" exact="true">
                           <p>Bonjour {userInfos.userName}... </p>
+                          <p className="mail">{userInfos.email}</p>
                       </Link>
                       <div className="navbar-top_account_Button_avatar" onClick={() => setShow(!show)}>
-                        {userInfos.avatar > 0 && (
+                        {userInfos.avatar && (userInfos.avatar.length > 0 ) && (
                           <img src={`http://localhost:3001/${userInfos.avatar[0].filePath}`} alt="xxxx" />
                         )}
                       </div>

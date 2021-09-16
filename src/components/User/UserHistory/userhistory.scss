@@ -1,0 +1,54 @@
+.orders{
+    padding: 1rem;
+
+    &-title{
+
+        font-weight: bold;
+        color: red;
+    }
+
+    &-container{
+        // border: 1px solid red;
+        background-color: white;
+        margin: 2rem 0;
+        border-radius: 5px;
+    
+        &_header{
+            padding: 1rem;
+            border-top-right-radius: 5px;
+            border-top-left-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            background-color: rgb(213, 213, 213);
+            font-size: 0.7rem;
+            &_num{
+                color: green;
+                margin-left: 5px;
+            }
+            
+            &_price{
+                color: red;
+                margin-left: 5px;
+            }
+        }
+        &_list{
+            font-size: 0.8rem;
+            padding: 1rem;
+            text-align: left;
+            p {
+                line-height: 1rem;
+                margin: 1rem 0;
+            }
+            &_product{
+                display: flex;
+                justify-content: space-between;
+                div{
+                    padding: 0 10px;
+                    width: 50%;
+                    border-radius: 5px;
+                    border: 1px solid rgb(195, 202, 253);
+                }
+            }
+        }
+    }
+}

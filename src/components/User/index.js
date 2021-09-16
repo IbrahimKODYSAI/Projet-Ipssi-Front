@@ -12,6 +12,7 @@ const User = ({ userInfo, isAdmin, avatar, }) => {
 
   useEffect(() => {
     userInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
@@ -68,7 +69,7 @@ const handleUpdateAvatar = async (e) => {
                       <img src={`http://localhost:3001/${avatar[0].filePath}`} alt="xxxx" />
                     )}
                 </div>
-                {/* <button onClick={(e) => handleUpdateAvatar(e)}>upload</button> */}
+                <button onClick={(e) => handleUpdateAvatar(e)}>upload</button>
               <div className="wrapper-header_img">
                 <img
                   src="img/banner.jfif"

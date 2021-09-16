@@ -44,7 +44,8 @@
       color: white;
       margin-right: 20px;
       p{
-        margin: auto 10px 0px;
+        text-align: justify;
+        margin: auto 10px 5px;
       }
       &_avatar{
         position: relative;
@@ -70,7 +71,7 @@
           position: absolute;
           top: 23px;
           right: 160px;
-          z-index: 80;
+          z-index: 400;
           text-align: justify;
           p{
             text-align: left;
@@ -100,6 +101,11 @@
             top: 0.3em;
 
           }
+        }
+      }
+      &_avatar:hover  &_avatar{
+        &_dropdown{
+          display: block;
         }
       }
     }

@@ -244,9 +244,6 @@ export const ON_SUBMIT_COMMENTARY = "ON_SUBMIT_COMMENTARY";
 
 const SET_TOGGLE_SIDEDRAWER = "SET_TOGGLE_SIDEDRAWER";
 const SET_CART_ITEMS = "SET_CART_ITEMS";
-const REMOVE_FROM_CART = "REMOVE_FROM_CART";
-const SET_CARTITEM_QTY_PLUS = "SET_CARTITEM_QTY_PLUS";
-const SET_CARTITEM_QTY_MINUS = "SET_CARTITEM_QTY_MINUS";
 const SET_COMMENT_LIST = "SET_COMMENT_LIST";
 const SET_ONE_PRODUCT = "SET_ONE_PRODUCT";
 const SET_ALL_PRODUCTS = "SET_ALL_PRODUCTS";
@@ -348,21 +345,6 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         cartItems: action.cart
       }
-    case SET_CARTITEM_QTY_PLUS:
-      return {
-        ...state,
-        cartItems: action.cart
-      }
-    case SET_CARTITEM_QTY_MINUS:
-      return {
-        ...state,
-        cartItems: action.cart
-      }
-    case REMOVE_FROM_CART:
-      return {
-        ...state,
-        cartItems: state.cartItems.filter((x) => x._id !== action.product._id)
-      }
     case CLEAN_REGISTER_FIELD: {
       return {
         ...state,
@@ -408,18 +390,6 @@ export const setAllProducts = (allProducts) => ({
 });
 export const setCartItems = (cart) => ({
   type: SET_CART_ITEMS,
-  cart
-});
-export const removeProduct = (product) => ({
-  type: REMOVE_FROM_CART,
-  product
-});
-export const setCartItemQty = (cart) => ({
-  type: SET_CARTITEM_QTY_PLUS,
-  cart
-});
-export const setCartItemQtyMinus = (cart) => ({
-  type: SET_CARTITEM_QTY_MINUS,
   cart
 });
 export const onSubmitCart = () => ({

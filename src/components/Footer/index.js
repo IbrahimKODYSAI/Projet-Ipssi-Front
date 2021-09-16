@@ -1,7 +1,7 @@
 // // == Import : npm
 // import 'semantic-ui-css/semantic.min.css';
 // import { Icon } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import React from 'react';
 
 // == Import : local

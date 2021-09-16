@@ -14,11 +14,14 @@ import User from "containers/User";
 import AdminPanel from "containers/AdminPanel";
 import Article from "containers/Article";
 import Cart from "containers/Cart"
-
 import BergerMenu from "containers/BergerMenu"
+import Checkout from "containers/Checkout";
+
 
 import "../App/app.scss";
 import "../../styles/utils.scss";
+import Success from "components/Checkout/StripeCheckout/success";
+import Canceled from "components/Checkout/StripeCheckout/canceled";
 
 export default function App() {
   return (
@@ -32,13 +35,16 @@ export default function App() {
         <Route path="/article/:id" exact component={Article} />
         <Route path="/cart" exact component={Cart}/>
         <Route path="/signup" exact component={SignUp} />
-        <Route path="/login" excat component={Login} />
+        <Route path="/login" exact component={Login} />
         <Route path="/user" component={User} />
         <Route path="/forgotten-password" exact component={ForgottenPassword} />
         <Route path="/mention_legale" exact component={Legal} />
         <Route path="/contact" exact component={Contact} />
         <Route path="/contact" exact component={Contact} />
         <Route path="/user-admin-panel" exact component={AdminPanel} />
+        <Route path="/cart/checkout" exact component={Checkout} />
+        <Route path="/cart/checkout/success" exact component={Success} />
+        <Route path="/cart/checkout/canceled" exact component={Canceled} />
 
       </main>
       <div className="wrapper"></div>

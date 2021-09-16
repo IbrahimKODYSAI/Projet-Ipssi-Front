@@ -7,6 +7,7 @@ const ProductManagement = ({listProduct, allProducts}) => {
     useEffect(() => {
         listProduct();
         console.log(allProducts)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     
     const [inputValues, setInputValues] = useState({
@@ -123,7 +124,6 @@ const ProductManagement = ({listProduct, allProducts}) => {
             });
             if(res.data.success){
                 alert(res.data.msg);
-                
             }
             listProduct();
         }

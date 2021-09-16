@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect } from "react";
 import { Link } from 'react-router-dom';
 
 import './cart.scss'
@@ -6,11 +7,17 @@ import './cart.scss'
 
 const Cart = ({
     cart,
-    setCartItemQty,
-    removeProduct,
-    setCartItemQtyMinus,
-    onSubmitCart
+    onSubmitCart,
+    setCartItems,
 }) => {
+
+    let getLocalCart = localStorage.getItem("cart")
+    
+    useEffect(() => {
+        let localCart = JSON.parse(getLocalCart)
+        if (localCart) setCartItems(localCart)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     
     const allPrices = cart.map((item) => item.price * item.quantity)
@@ -20,28 +27,45 @@ const Cart = ({
     var sumQty = allQty.reduce((a, b) => { return a + b; }, 0);
 
     const addProduct = async (product) => {
-            setCartItemQty(
+            let strinCopy = JSON.stringify(
                 cart.map((x) =>
                     x._id === product._id
                     ? { ...product, quantity: product.quantity + 1 }
                     : x
             ))
+            localStorage.setItem("cart", strinCopy)
+            let getLocalCart = localStorage.getItem("cart")
+            let localCart = JSON.parse(getLocalCart)
+            setCartItems(localCart)
             await onSubmitCart() 
     }
 
     const reduceIemQty = async (product) => {
         if(product.quantity > 1) {
-            setCartItemQtyMinus(
-                cart.map((item) =>
-                    item._id === product._id
-                    ? { ...product, quantity: product.quantity - 1}
-                    : item
+            let strinCopy = JSON.stringify(
+                cart.map((x) =>
+                    x._id === product._id
+                    ? { ...product, quantity: product.quantity - 1 }
+                    : x
             ))
+            localStorage.setItem("cart", strinCopy)
+            let getLocalCart = localStorage.getItem("cart")
+            let localCart = JSON.parse(getLocalCart)
+            setCartItems(localCart)
         }
         await onSubmitCart()
     }
     const handleRemoveItem = async (product) => {
-        removeProduct(product)
+
+        const existItem = cart.find((item) => item._id === product._id)
+        if(!existItem) return
+
+        let strinCopy = JSON.stringify(cart.filter((x) => x._id !== product._id))
+        localStorage.setItem("cart", strinCopy)
+        let getLocalCart = localStorage.getItem("cart")
+        let localCart = JSON.parse(getLocalCart)
+        setCartItems(localCart)
+
         await onSubmitCart()
     }
 
@@ -82,7 +106,11 @@ const Cart = ({
                         <p>Total ({sumQty}) articles</p>
                         <p>{sumPrices} €</p>
                     </div>
-                    <div><button>Paiement</button></div>
+                    <div>
+                        <Link to="cart/checkout" exact="true">
+                            <button>Paiement</button>
+                        </Link>
+                    </div>
                 </div>
             </div>
 

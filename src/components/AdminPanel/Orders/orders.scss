@@ -1,0 +1,46 @@
+.adminOrders{
+
+    h1{
+        font-weight: bold;
+        margin: 10px auto;
+    }
+
+    &-searchInputs{
+        display: flex;
+        margin: auto;
+        justify-content: center;
+
+        input {
+            width: 50%;
+            background-color: white;
+            border: 0;
+            border-radius: 3px;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+            font-size: 18px;
+            padding: 10px;
+            height: 30px;
+        }
+        input:focus{
+            outline: none;
+        }
+
+        &_searchIcon {
+            color: black;
+            height: 30px;
+            width: 50px;
+            background-color: rgb(255, 255, 255);
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+        }
+    }
+
+    &-result {
+        border-radius: 5px;
+        padding: 10px;
+        margin: 10px auto;
+        width: 80%;
+        background-color: white;
+    }
+}

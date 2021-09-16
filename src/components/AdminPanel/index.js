@@ -6,6 +6,8 @@ import "./adminpanel.scss";
 import AddProductAdmin from 'containers/AdminPanel/AddProductAdmin';
 import ProductManagement from "./ProductManagement";
 import UsersManagement from "./UsersManagement";
+import Statistiques from "./Statistiques";
+import Orders from "./Orders";
 
 const User = ({userInfo, getUsers, getProducts, products, users, isAdmin, avatar}) => {
 
@@ -13,6 +15,7 @@ const User = ({userInfo, getUsers, getProducts, products, users, isAdmin, avatar
     userInfo();
     getProducts();
     getUsers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
@@ -22,16 +25,20 @@ const User = ({userInfo, getUsers, getProducts, products, users, isAdmin, avatar
       allProducts={products}
       listProduct={getProducts}
       />, 
-      title: "Product Management"
+      title: "Gestion des produits"
     },
     {
       component: <UsersManagement
       getUsers={getUsers}
       users={users}
       />,
-      title: "Manage users"
+      title: "Gestion des Utilisateurs"
     },
-    {component: <AddProductAdmin />, title: "Add a product"},
+    {component: <AddProductAdmin />, title: "Ajouter un produit"},
+    {component: <Statistiques />, title: "Statistiques"},
+    {component: <Orders />, title: "Commandes client"},
+
+
   ]
 
   const [showContent, setShowContent] = useState(menuItems[0].title);

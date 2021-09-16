@@ -16,6 +16,7 @@ const SideDrawer = ({
 }) => {
     useEffect(() => {
         getUserInfo()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     const sideDrawerClass = ["sidedrawer"];
 
@@ -38,7 +39,7 @@ const SideDrawer = ({
                     <div className="sidedrawer_Button_logged" onClick={click}>
                         <Link to="/user" exact="true">
                             <div className="sidedrawer_Button_logged_img">
-                                {userInfos.avatar > 0 && (
+                                {userInfos.avatar.length > 0 && (
                                     <img src={`http://localhost:3001/${userInfos.avatar[0].filePath}`} alt="xxxx" />
                                 )}
                             </div>
