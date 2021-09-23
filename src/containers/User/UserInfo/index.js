@@ -12,6 +12,7 @@ const mapStateToProps = state => ({
   userName: state.userInfo.userName,
   email: state.userInfo.email,
   avatar: state.userInfo.avatar,
+  password: state.userInfo.password
 });
 
 const mapDispatchToProps = dispatch => ({

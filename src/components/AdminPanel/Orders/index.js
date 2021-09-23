@@ -25,7 +25,7 @@ const Orders = () => {
     },[])
 
     const [inputValue, setInputValue] = useState("")
-    const [foundedOrders, setFoundedOrders] = useState([])
+    const [foundedOrders, setFoundedOrders] = useState(allOrders)
 
     const handleOnInputChange = (event) => {
         const { value: fieldValue } = event.target;
@@ -72,8 +72,8 @@ const Orders = () => {
             </div>
             {
                 foundedOrders.map((order, index) => {
-                    return <div className="adminOrders-result">
-                                <p>N° de commande : {order._id}</p>    
+                    return <div className="adminOrders-result" key={order._id}>
+                                <h2>N° de commande : <span>{order._id}</span></h2>    
                                 <div>
                                     <input id="validée" defaultChecked type="radio" value="Validée" name="statut" /> Validée
                                     <input id="En préparation" type="radio" value="En préparation" name="statut" /> En préparation

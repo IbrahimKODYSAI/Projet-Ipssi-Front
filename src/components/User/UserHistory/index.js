@@ -21,7 +21,6 @@ const UserHistory = () => {
                 }
             })
             .then((response) => {
-                console.log(response.data)
                 setUserOrders(response.data)
 
             })
@@ -29,6 +28,7 @@ const UserHistory = () => {
                 console.log(error.message)
             })
         })()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
     return (

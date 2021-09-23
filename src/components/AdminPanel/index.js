@@ -35,8 +35,16 @@ const User = ({userInfo, getUsers, getProducts, products, users, isAdmin, avatar
       title: "Gestion des Utilisateurs"
     },
     {component: <AddProductAdmin />, title: "Ajouter un produit"},
-    {component: <Statistiques />, title: "Statistiques"},
     {component: <Orders />, title: "Commandes client"},
+    {
+      component: <Statistiques
+      getUsers={getUsers}
+      users={users}
+      allProducts={products}
+      listProduct={getProducts}
+      />,
+      title: "Statistiques"
+    },
 
 
   ]

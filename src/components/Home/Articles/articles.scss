@@ -239,3 +239,32 @@
     }
   }
 }
+
+
+.paginationBttns {
+  width:  80%;
+  height:  4px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin: 50px auto;
+}
+
+
+.paginationBttns a {
+  padding:  5px 10px;
+  margin: 8px;
+  border-radius: 5px;
+  border: 1px solid rgb(0, 0, 0);
+  cursor: pointer;
+}
+
+.paginationBttns a:hover {
+  color: white;
+  background-color: black;
+}
+
+.paginationActive a {
+  color: white;
+  background-color: black;
+}

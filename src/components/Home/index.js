@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useEffect } from "react";
+
 import Carousel from './Carousel';
 import ArticleOfTheWeek from './ArticleOfTheWeek';
 import Articles from 'containers/Home/Articles';
 import './home.scss'
 
 
-const Home = () => {
+const Home = ({ getProducts, products }) => {
+
+    useEffect(() => {
+        getProducts();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, []);
 
     return (
         <div className="home">
@@ -23,8 +29,6 @@ const Home = () => {
                         Populaire</button>
                     <button className="btn2" >
                         Nouveautés</button>
-                    <button className="btn3" >
-                        Meilleures Ventes</button> 
                 </div>
                 <div>
                     <button className="btn4">

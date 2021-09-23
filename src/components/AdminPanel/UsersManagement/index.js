@@ -8,7 +8,6 @@ const UsersManagement = ({getUsers, users}) => {
         getUsers();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-    console.log(users)
 
     return (
 

@@ -18,10 +18,16 @@ class Carousel extends Component {
                     className="carousel1"
                 >
                     <div className="carou-img">
-                        <img  src="https://cheapecomlife.com/wp-content/uploads/2020/10/what-is-dropshipping-banner-ecomlife.png" alt=""/>
+                        <img  src="http://localhost:3001/uploads/banner1.jpg" alt=""/>
                     </div>
                     <div className="carou-img">
-                        <img  src="https://cheapecomlife.com/wp-content/uploads/2020/10/what-is-dropshipping-banner-ecomlife.png" alt=""/>
+                        <img  src="http://localhost:3001/uploads/banniere2.jpg" alt=""/>
+                    </div>
+                    <div className="carou-img">
+                        <img  src="http://localhost:3001/uploads/banniere3.jpg" alt=""/>
+                    </div>
+                    <div className="carou-img">
+                        <img  src="http://localhost:3001/uploads/banniere4.jpg" alt=""/>
                     </div>
                 </ReactCarousel>
         );

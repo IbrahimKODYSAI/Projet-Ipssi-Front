@@ -10,61 +10,54 @@ import './footer.scss';
 
 // == Composant
 const Footer = () => (
-      <div className="footer-navigation">
-        <section>
-            <h2>Adide & Information</h2>
+      <div >
+        <div className="footer-navigation">
+          <section>
+              <h2>Aide & Information</h2>
+              <ul className="help">
+                <li>Livraison 24h en point retrait</li>
+                <li>Suivre mon colis</li>
+                <li>Assistance</li>
+                <li>Guide des tailles</li>
+              </ul>
+          </section>
+          <section>
+            <h2>à propos de BIGOODEAL</h2>
             <ul className="help">
-              <li>Questions fréquentes</li>
-              <li>Essayer d'abord, payer après</li>
-              <li>Livraison 24h en point retrait</li>
-              <li>Retour depuis votre boîte aux lettres</li>
-              <li>Suivre mon colis</li>
-              <li>Assistance</li>
-              <li>Guide des tailles</li>
+              <li>Programme d'affiliation</li>
+              <li>Mode d'emploi Mode</li>
+              <li>Investisseurs</li>
             </ul>
-        </section>
-        <section>
-          <h2>à propos de Queens'sLand</h2>
-          <ul className="help">
-            <li>Corporate Website</li>
-            <li>Queen'sLand recrute</li>
-            <li>Presse</li>
-            <li>Programme d'affiliation</li>
-            <li>Queen'sLand Marketing Services</li>
-            <li>Mode d'emploi Mode</li>
-            <li>Investisseurs</li>
-          </ul>
-        </section>
-        <section>
-          <h2>Chêques cadeaux</h2>
-          <ul className="help">
-            <li>Offrir une carte cadeau</li>
-            <li>Utiliser uen carte cadeau</li>
-            <li>Chèques cadeaux d'entreprise</li>
-          </ul>
-        </section>
-        <section>
-          <h2>Moyens de paiement</h2>
-          <ul className="card">
-            <li><img src="images/master.PNG" alt=""/></li>
-            <li><img src="images/visa.PNG" alt=""/></li>
-            <li><img src="images/paypal.PNG" alt=""/></li>
-            <li><img src="images/amex.PNG" alt=""/></li>
-          </ul>
-        </section>
-        
+          </section>
+          <section>
+            <h2>Chêques cadeaux</h2>
+            <ul className="help">
+              <li>Offrir une carte cadeau</li>
+              <li>Utiliser uen carte cadeau</li>
+              <li>Chèques cadeaux d'entreprise</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Moyens de paiement</h2>
+            <ul className="card">
+              <li><img src="img/master.PNG" alt=""/></li>
+
+              <li><img src="img/paypal.PNG" alt=""/></li>
+              <li><img src="img/amex.png" alt=""/></li>
+            </ul>
+          </section>
+        </div>
         <div className="footer-navigation-2">
           <div className="mentions-liste">
             <ul>
               <li>Mentions légales</li>
               <li>Proctection des données</li>
-              <li>CGV</li>
               <li>Conditions des offres</li>
               <li>Traitements des données</li>
             </ul>
           </div>
           <div className="app-icons">
-            <h3>applicaitons Queen'sLand</h3>
+            <h3>applicaitons BIGOODEAL</h3>
             <div>
               <svg id="apple" preserveAspectRatio="xMidYMid meet" viewBox="0 0 512 512"><path d="M395.748 272.046c-.646-64.84 52.88-95.938 55.27-97.483-30.074-44.01-76.924-50.04-93.62-50.736-39.87-4.037-77.797 23.474-98.032 23.474-20.184 0-51.41-22.876-84.476-22.275-43.458.646-83.53 25.27-105.906 64.19-45.152 78.35-11.563 194.42 32.445 257.963 21.503 31.104 47.145 66.038 80.812 64.79 32.42-1.294 44.68-20.98 83.878-20.98 39.196 0 50.215 20.98 84.524 20.336 34.888-.648 56.99-31.7 78.347-62.898 24.695-36.084 34.863-71.02 35.463-72.812-.775-.354-68.03-26.12-68.705-103.568zM331.28 81.76C349.15 60.083 361.21 30.006 357.92 0c-25.74 1.048-56.938 17.145-75.405 38.775-16.57 19.188-31.075 49.813-27.188 79.218 28.734 2.242 58.065-14.602 75.953-36.232z"></path></svg>
               <svg id="android" preserveAspectRatio="xMidYMid meet" viewBox="0 0 505.145 505.145"><path d="M68.54 164.715h-1.293c-16.588 0-30.113 13.568-30.113 30.113v131.107c0 16.61 13.525 30.134 30.113 30.134h1.316c16.588 0 30.113-13.57 30.113-30.135V194.827c-.022-16.544-13.568-30.112-30.135-30.112zm44.545 211.825c0 15.23 12.446 27.632 27.675 27.632h29.574v70.817c0 16.63 13.568 30.155 30.113 30.155h1.294c16.61 0 30.157-13.546 30.157-30.156V404.17h41.33v70.817c0 16.63 13.61 30.155 30.156 30.155h1.273c16.61 0 30.134-13.546 30.134-30.156V404.17h29.595c15.207 0 27.654-12.403 27.654-27.632V169.525H113.084V376.54zM322.04 43.983l23.492-36.26c1.51-2.287.84-5.414-1.467-6.903-2.286-1.51-5.414-.884-6.903 1.467L312.81 39.8c-18.27-7.486-38.677-11.692-60.227-11.692-21.57 0-41.934 4.206-60.247 11.69l-24.31-37.51C166.538-.065 163.388-.69 161.08.82c-2.308 1.488-2.977 4.616-1.467 6.903l23.512 36.26c-42.387 20.773-70.968 59.924-70.968 104.834 0 2.76.173 5.48.41 8.175H392.62c.237-2.696.388-5.414.388-8.175 0-44.91-28.602-84.06-70.967-104.834zM187.656 108.91c-7.442 0-13.482-5.996-13.482-13.46 0-7.462 6.04-13.438 13.482-13.438 7.485 0 13.482 5.975 13.482 13.44s-6.04 13.46-13.482 13.46zm129.835 0c-7.442 0-13.482-5.996-13.482-13.46 0-7.462 6.04-13.438 13.482-13.438 7.463 0 13.46 5.975 13.46 13.44 0 7.462-5.997 13.46-13.46 13.46zm120.385 55.805h-1.25c-16.59 0-30.157 13.568-30.157 30.113v131.107c0 16.61 13.59 30.134 30.155 30.134h1.273c16.61 0 30.113-13.57 30.113-30.135V194.827c0-16.544-13.546-30.112-30.134-30.112z"></path></svg>

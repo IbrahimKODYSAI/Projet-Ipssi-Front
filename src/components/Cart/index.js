@@ -1,9 +1,15 @@
 import React from 'react';
 import { useEffect } from "react";
 import { Link } from 'react-router-dom';
+import { useStripe } from '@stripe/react-stripe-js';
+import axios from 'axios'
 
 import './cart.scss'
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"
+
+toast.configure()
 
 const Cart = ({
     cart,
@@ -16,8 +22,11 @@ const Cart = ({
     useEffect(() => {
         let localCart = JSON.parse(getLocalCart)
         if (localCart) setCartItems(localCart)
+        window.scrollTo(0, 0)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    const stripe = useStripe();
 
     
     const allPrices = cart.map((item) => item.price * item.quantity)
@@ -67,18 +76,67 @@ const Cart = ({
         setCartItems(localCart)
 
         await onSubmitCart()
+        toast.success("product supprimer du panier", {
+            position: toast.POSITION.BOTTOM_CENTER,
+            autoClose: 2000
+        })
+    }
+
+    const handleGuestCheckout = async (e) => {
+        e.preventDefault();
+        const line_items = cart.map(item => {
+          return {
+            quantity: item.quantity,
+            price_data: {
+              currency: 'eur',
+              unit_amount: item.price * 100, // amount is in cents
+              product_data: {
+                name: item.name,
+                description: item.title,
+                images: item.images[0].filePath, 
+              }
+            }
+          }
+        });
+
+        await axios.request({
+            url: 'http://localhost:3001/api/user/create-checkout-session',
+            method: 'post',
+            data: {
+                line_items,
+            },
+            headers: {
+                Authorization: JSON.parse(sessionStorage.getItem('token'))
+            }
+        })
+        .then((response) => {
+            console.log(response);
+            const { sessionId } = response.data;
+            const { error } = stripe.redirectToCheckout({
+                sessionId
+            });
+            if (error) {
+                console.log(error);
+            }
+
+        })
+        .catch((error) => {
+            console.log(error.response);
+
+        });
+
     }
 
     return (
         <div>
+            <div className="cart_items-header">
+                <h2>Mon panier</h2>
+            </div>
             {cart.length === 0 &&
                 <div className="cart-items-empty">
-                    Empty
+                    <h1>est vide</h1>
                 </div>
             }
-            <div className="cart_items-header">
-                <h2>Shopping Cart</h2>
-            </div>
             
             <div className="cartscreen">
                 <div className="cartscreen_left">
@@ -107,9 +165,7 @@ const Cart = ({
                         <p>{sumPrices} €</p>
                     </div>
                     <div>
-                        <Link to="cart/checkout" exact="true">
-                            <button>Paiement</button>
-                        </Link>
+                        <button onClick={handleGuestCheckout}>Paiement</button>
                     </div>
                 </div>
             </div>

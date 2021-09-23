@@ -1,4 +1,7 @@
 import axios from 'axios';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"
+
 import {
   GET_ONE_PRODUCT,
   setOneProduct,
@@ -18,6 +21,8 @@ import {
   setAllProducts,
   ON_SUBMIT_CART,
 } from '../store/reducer';
+
+toast.configure()
 const logMiddleware = store => next => (action) => {
     // console.log('Je suis le middleware, et je laisse passer cette action: ', action);
     next(action);
@@ -34,14 +39,20 @@ const logMiddleware = store => next => (action) => {
           passwordConfirm: store.getState().registerPasswordConfirm
         })
           .then((response) => {
-            // console.log(response.data);
+            toast.success("Inscription réussi", {
+              position: toast.POSITION.TOP_RIGHT,
+              autoClose: 3000
+            })
             store.dispatch(cleanRegisterFields());
             window.location.href = '/login';
           })
           // en cas d'echec : catch
           .catch((error) => {
             console.error(error.message);
-            console.error(error.response);
+            toast.error(error.response.data, {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: 3000
+            })
           });
         break;
       case ON_SUBMIT_LOGIN:
@@ -53,12 +64,19 @@ const logMiddleware = store => next => (action) => {
             store.dispatch(setUsersLogin(response.data.token));
             sessionStorage.setItem('token', JSON.stringify(store.getState().token));
             window.location.href = '/';
+            toast.success("Connecté", {
+              position: toast.POSITION.TOP_RIGHT,
+              autoClose: 3000
+            })
           })
           // en cas d'echec : catch
           .catch((error) => {
+            toast.error(error.response.data, {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: 3000
+            })
             console.error(error.message, 'Username or Password does not exists');
             console.error(error.response);
-            window.alert('Username or Password does not exists')
           });
         break;
       case GET_ALL_USERS:
@@ -82,7 +100,6 @@ const logMiddleware = store => next => (action) => {
         })
         .then(response => {
           const { user } = response.data
-          console.log(user.avatar)
           store.dispatch(setUserInfo(
             user.username,
             user.firstname,
@@ -90,6 +107,7 @@ const logMiddleware = store => next => (action) => {
             user.email,
             user.isAdmin,
             user.avatar,
+            user.password
           ));
         })
         .catch(error => {
@@ -100,21 +118,17 @@ const logMiddleware = store => next => (action) => {
       case GET_ALL_PRODUCTS:
         axios.get('http://localhost:3001/api/product')
         .then((response) => {
-          console.log(response.data)
           store.dispatch(setAllProducts(response.data))
-          console.log('sucess')
         })
         .catch((error) => {
           console.error(error.message)
         });
         break;
       case GET_ONE_PRODUCT:
-        console.log('action', action);
         axios.post('http://localhost:3001/api/product/details', {
           productId: action.productId,
         })
           .then((response) => {
-            console.log(response.data);
             store.dispatch(setOneProduct(response.data));
           })
           // en cas d'echec : catch
@@ -137,7 +151,6 @@ const logMiddleware = store => next => (action) => {
         })
           .then((response) => {
             store.dispatch(getOneProductCommentaries(store.getState().oneProduct._id))
-            console.log(response.data);
           })
           // en cas d'echec : catch
           .catch((error) => {
@@ -150,7 +163,6 @@ const logMiddleware = store => next => (action) => {
           productId: action.productId,
         })
           .then((response) => {
-            console.log(response.data)
             store.dispatch(setCommentList(response.data))
             store.dispatch(cleanRegisterFields());
           })
@@ -167,7 +179,10 @@ const logMiddleware = store => next => (action) => {
           }
         })
         .then((response) => {
-          console.log(response.data);
+          // toast.success("product added to cart", {
+          //   position: toast.POSITION.BOTTOM_CENTER,
+          //   autoClose: 2000
+          // })
         })
         .catch((error) => {
           console.log(error.response);

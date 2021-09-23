@@ -2,7 +2,7 @@ import React from "react";
 import { Route } from "react-router";
 
 // import { useState, useEffect } from "react";
-import Home from "components/Home";
+import Home from "containers/Home";
 import Header from "containers/Header";
 import ForgottenPassword from "components/ForgottenPassword";
 import Footer from "components/Footer";
@@ -15,13 +15,11 @@ import AdminPanel from "containers/AdminPanel";
 import Article from "containers/Article";
 import Cart from "containers/Cart"
 import BergerMenu from "containers/BergerMenu"
-import Checkout from "containers/Checkout";
-
 
 import "../App/app.scss";
 import "../../styles/utils.scss";
-import Success from "components/Checkout/StripeCheckout/success";
-import Canceled from "components/Checkout/StripeCheckout/canceled";
+import Success from "containers/Cart/success"
+import Canceled from "components/Cart/canceled";
 
 export default function App() {
   return (
@@ -42,7 +40,6 @@ export default function App() {
         <Route path="/contact" exact component={Contact} />
         <Route path="/contact" exact component={Contact} />
         <Route path="/user-admin-panel" exact component={AdminPanel} />
-        <Route path="/cart/checkout" exact component={Checkout} />
         <Route path="/cart/checkout/success" exact component={Success} />
         <Route path="/cart/checkout/canceled" exact component={Canceled} />
 

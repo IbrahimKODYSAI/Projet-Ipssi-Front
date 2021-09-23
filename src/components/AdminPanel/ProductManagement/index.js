@@ -6,7 +6,6 @@ import Axios from "axios"
 const ProductManagement = ({listProduct, allProducts}) => {
     useEffect(() => {
         listProduct();
-        console.log(allProducts)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     

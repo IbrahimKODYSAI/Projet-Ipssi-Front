@@ -3,7 +3,7 @@ const texts = {
     title: 'Sign Up',
     desc: 'Fill all the champs to creat a new account',
     link: 'Already Registered ?',
-    submit: 'Log in',
+    submit: 'Register',
   },
 };
 

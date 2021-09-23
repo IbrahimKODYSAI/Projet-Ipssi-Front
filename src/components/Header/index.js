@@ -2,10 +2,15 @@ import React, { useEffect, useState } from "react";
 import "./header.scss";
 import { Link } from "react-router-dom";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 // import LangFr from "../../assets/img/fr.png";
 import LOGO from "../../assets/img/LOGO.PNG"
 import SearChBar from "./SearchBar";
 import "../../styles/utils.scss"
+
+toast.configure()
 
 const Header = ({
   inputSearchValue,
@@ -40,6 +45,19 @@ const Header = ({
     }
   };
 
+  //  const techno2 = () => {
+  //    products.map((product, index) => {
+  //     const cat = product.categories.map((item) => {
+  //         const foundcat = item
+  //         console.log(foundcat)
+  //         return foundcat
+  //     })
+  //    console.log(cat)
+  //    })
+  //  }
+
+  // console.log(techno2())
+
   // const totalItemInCart = allItemQty.reduce((a, b) => {return a +b }, 0)
 
   const props = {
@@ -49,7 +67,17 @@ const Header = ({
     foundProducts,
     setFoundedProduct,
   }
+ 
+   const deconnexion = () => {
+      sessionStorage.removeItem('token')
+      window.scrollTo(0, 0)
 
+      toast.info("Déconnexion", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 2000
+      })
+   }
+   
   return (
     <header>
       <div className="navbar">
@@ -100,7 +128,7 @@ const Header = ({
             <div className="navbar-top_account">
                 <div className="navbar-top_account_Button">
                       <Link to="/user" exact="true">
-                          <p>Bonjour {userInfos.userName}... </p>
+                          <p>Bonjour {userInfos.userName}</p>
                           <p className="mail">{userInfos.email}</p>
                       </Link>
                       <div className="navbar-top_account_Button_avatar" onClick={() => setShow(!show)}>
@@ -115,9 +143,11 @@ const Header = ({
                             <Link to="/user" exact="true">
                               <li>Mon comtpe</li>
                             </Link>
-                            <div onClick={() => sessionStorage.removeItem('token')}>
-                              <li>Se deconnecté</li>
-                            </div>
+                            <Link to="/" exact="true">
+                              <div onClick={deconnexion}>
+                                <li>Se deconnecté</li>
+                              </div>
+                            </Link>
                           </ul>
                         </div>
                       )}

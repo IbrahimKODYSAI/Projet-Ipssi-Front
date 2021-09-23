@@ -7,12 +7,10 @@ const ArticleOfTheWeek  = () => {
     return (
         <section className="container">
             <article className="container-article">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                <img src="https://publicidademarketing.com/wp-content/themes/yootheme/cache/Os-5-melhores-Plugins-de-Dropshipping-WooCommerce-em-2020-654b9c97.jpeg" alt="" />
+                <img src="https://image.jeuxvideo.com/medias-md/159481/1594813240-7881-card.png" alt="" />
             </article>
             <article className="container-article">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                <img src="https://publicidademarketing.com/wp-content/themes/yootheme/cache/Os-5-melhores-Plugins-de-Dropshipping-WooCommerce-em-2020-654b9c97.jpeg" alt="" />
+                <img src="https://image.jeuxvideo.com/medias-md/159192/1591918585-9423-photo-playstation-5.png" alt="" />
             </article>
         </section>
     );

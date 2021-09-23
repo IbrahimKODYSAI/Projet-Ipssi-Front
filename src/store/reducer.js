@@ -31,7 +31,8 @@ const initialState = {
         fileSize: "",
       }
     ],
-    isAdmin: false
+    isAdmin: false,
+    password: ""
   },
 
   Users: [],
@@ -300,7 +301,8 @@ const reducer = (state = initialState, action = {}) => {
           userName: action.userName,
           email: action.email,
           isAdmin: action.isAdmin,
-          avatar: action.avatar
+          avatar: action.avatar,
+          password: action.password,
         },
       };
     case SET_ALL_USERS:
@@ -336,9 +338,9 @@ const reducer = (state = initialState, action = {}) => {
     case SET_RATING_PRODUCT:
       return {
         ...state,
-        rating: state.products
+        ratings: state.products
           .find((element) => element._id === action.productId)
-          .rating.push(action.ratingValue),
+          .ratings.push(action.ratingValue),
       };
     case SET_CART_ITEMS:
       return {
@@ -456,7 +458,8 @@ export const setUserInfo = (
   lastName,
   email,
   isAdmin,
-  avatar
+  avatar,
+  password
 ) => ({
   type: SET_USER_INFO,
   userName,
@@ -464,6 +467,7 @@ export const setUserInfo = (
   lastName,
   email,
   isAdmin,
-  avatar
+  avatar,
+  password
 });
 export default reducer;

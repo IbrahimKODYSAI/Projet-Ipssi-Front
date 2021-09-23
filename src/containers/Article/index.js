@@ -47,6 +47,7 @@ const mapDispatchToProps = {
     }
   },
   setRating: (ratingValue, productId) => {
+    console.log(ratingValue)
      return {
       type: 'SET_RATING_PRODUCT',
       ratingValue,

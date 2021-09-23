@@ -42,5 +42,12 @@
         margin: 10px auto;
         width: 80%;
         background-color: white;
+        h2{
+            margin: 10px auto;
+            span{
+                color: red;
+                margin-left: 10px;
+            }
+        }
     }
 }

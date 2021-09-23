@@ -1,10 +1,14 @@
 .footer-navigation{
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   margin-top: 1em;
   padding-top: 2em;
   justify-content: center;
   background-color: rgb(221, 217, 217);
+  section {
+    text-align: justify;
+  }
 }
 .help{
   column-count: 1;
@@ -31,8 +35,8 @@
   margin: 1em;
 }
 .card img{
-  height: 49px;
-  width: 89px;
+  height: 29px;
+  width: 59px;
 }
 .footer-navigation-2{
   color: white;

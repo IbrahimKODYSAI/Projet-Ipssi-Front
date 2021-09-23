@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import "./addproductadmin.scss";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"
+
+toast.configure()
 
 const AddProductAdmin = () => {
 
@@ -89,20 +93,17 @@ const AddProductAdmin = () => {
       }
     })
     .then((response) => {
-      console.log(response.data);
       console.log("product added successfuly")
-      // console.log(Object.keys(inputValues));
-      // return response
+      toast.success("product added successfuly", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 3000
+      })
     })
-    // .then(() => {
-    //   Object.keys(inputValues).forEach((input) => {
-    //     console.log(input)
-    //     setInputValues({ ...inputValues, [input]: "" })
-    //   })
-    // })
-    // en cas d'echec : catch
     .catch((error) => {
-      // console.error(error.message);
+      toast.error(error.response.data.slice(1, 50), {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 3000
+      })
       console.log(error.response);
     });
   }

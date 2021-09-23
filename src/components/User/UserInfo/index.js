@@ -2,8 +2,13 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Axios from 'axios';
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"
+
 import './userinfos.scss';
 import 'styles/utils.scss'
+
+toast.configure()
 
 const UserInfo = ({
     userInfo,
@@ -11,20 +16,20 @@ const UserInfo = ({
     firstName,
     lastName,
     email,
+    password
   }) => {
-    console.log(userName)
     const [inputValues, setInputValues] = useState({
       newUserName: userName,
       newFirstname: firstName,
       newLastname: lastName,
       newEmail: email,
-      newPassword: "",
+      newPassword: password,
+      confirmPassword: password
     })
     useEffect(() => {
       userInfo();
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    
 
     const onInputchange = (e) => {
       const {name, value} = e.target;
@@ -62,17 +67,25 @@ const UserInfo = ({
           username: inputValues.newUserName,
           firstname: inputValues.newFirstname,
           lastname: inputValues.newLastname,
-          email: inputValues.newEmail
+          email: inputValues.newEmail,
+          password: inputValues.newPassword,
+          passwordConfirm: inputValues.confirmPassword
         },
         headers: {
           Authorization: JSON.parse(sessionStorage.getItem('token'))
         }
       }).then(response => {
-          console.log(response.data)
+        toast.success("Profile mis à jour", {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 3000
+        })
           userInfo();
           CloseAllTab();
       }).catch(error => {
-          console.error(error.message);
+        toast.error(error.response.data.slice(1, 50), {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 3000
+        })
           console.error(error.response);
       })
     }
@@ -206,10 +219,17 @@ const UserInfo = ({
                 <div className={showPassword === true ? "pop-show" : "pop-hide"}>
                   <form>
                     <input
-                      placeholder="New username"
+                      placeholder="New password"
                       type="password"
-                      name="newUserName"
-                      value={inputValues.newUserName}
+                      name="newPassword"
+                      value={inputValues.newPassword}
+                      onChange={(e) => onInputchange(e)}
+                    />
+                    <input
+                      placeholder="Confirm password"
+                      type="password"
+                      name="confirmPassword"
+                      value={inputValues.confirmPassword}
                       onChange={(e) => onInputchange(e)}
                     />
                     <div className="btn2-div">

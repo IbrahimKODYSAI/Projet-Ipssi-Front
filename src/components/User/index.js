@@ -46,7 +46,6 @@ const handleUpdateAvatar = async (e) => {
       Authorization: JSON.parse(sessionStorage.getItem('token'))
     }
   }).then(response => {
-      console.log(response.data)
       userInfo();
   }).catch(error => {
       console.error(error.message);
@@ -69,7 +68,7 @@ const handleUpdateAvatar = async (e) => {
                       <img src={`http://localhost:3001/${avatar[0].filePath}`} alt="xxxx" />
                     )}
                 </div>
-                <button onClick={(e) => handleUpdateAvatar(e)}>upload</button>
+                <button onClick={(e) => handleUpdateAvatar(e)}>ajouter</button>
               <div className="wrapper-header_img">
                 <img
                   src="img/banner.jfif"
@@ -78,8 +77,8 @@ const handleUpdateAvatar = async (e) => {
               </div>
             </div>
           </div>
-          <div className="user-page">
-            <div className="user-page_links">
+          <div className="users-page">
+            <div className="users-page_links">
               {menuItems.map((item, index) => (
               <button
                 key={index}

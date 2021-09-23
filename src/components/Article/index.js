@@ -2,8 +2,14 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
+
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"
+
 import "../../styles/utils.scss";
 import "./article.scss"
+
+toast.configure()
 
 function Article({
   getOneProduct,
@@ -31,6 +37,7 @@ function Article({
     getOneProductCommentaries(match.params.id);
     let localCart = JSON.parse(getLocalCart)
     if (localCart) setCartItems(localCart)
+    window.scrollTo(0, 0)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   
@@ -69,6 +76,10 @@ function Article({
       setCartItems(localCart)
 
       await onSubmitCart()
+      toast.success("product added to cart", {
+        position: toast.POSITION.BOTTOM_CENTER,
+        autoClose: 2000
+      })
     }catch (error) {
         console.log('user cart update failed')
     }
@@ -111,31 +122,33 @@ function Article({
               <span>{oneProduct.price} €</span>
             </div>
             <div className="box-star">
-              {[...Array(5)].map((star, i) => {
-                const ratingValue = i + 1;
-                return (
-                  <label key={i}>
-                    <input
-                      type="radio"
-                      name="rating"
-                      value={ratingValue}
-                      onClick={() => setRating(ratingValue, oneProduct._id)}
-                    />
-
-                      <FaStar
-                        size={20}
-                        className="star"
-                        color={
-                          ratingValue <=
-                          getProductAverageRating(oneProduct.ratings)
-                            ? "#ffc107"
-                            : "#e4e5e9"
-                        }
+              <div>
+                {[...Array(5)].map((star, i) => {
+                  const ratingValue = i + 1;
+                  return (
+                    <label key={i}>
+                      <input
+                        type="radio"
+                        name="rating"
+                        value={ratingValue}
+                        onClick={() => setRating(ratingValue, oneProduct._id)}
                       />
-                  </label>
-                );
-              })}
-              {/* <p>{oneProduct.ratings.length} évaluations</p> */}
+
+                        <FaStar
+                          size={20}
+                          className="star"
+                          color={
+                            ratingValue <=
+                            getProductAverageRating(oneProduct.ratings)
+                              ? "#ffc107"
+                              : "#e4e5e9"
+                          }
+                        />
+                    </label>
+                  );
+                })}
+              </div>
+              <p>{oneProduct.ratings.length} évaluations</p>
             </div>
             <p>{oneProduct.description}</p>
               <div className="colors">
@@ -214,7 +227,7 @@ function Article({
                         <h4 id="userInfo-userName">{comment.author.username}</h4>
                         <p id="userInfo-date">{comment.createdAt}</p>
                       </div>
-                      <span>{comment.commentary}</span>
+                      <p>{comment.commentary}</p>
                     </div>
                   </div>
                 </li>
